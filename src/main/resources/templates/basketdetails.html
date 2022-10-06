@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small Case | Basket Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+    <nav class="navbar sticky">
+        <div class="content">
+            <div class="logo"><a href="#">Small Case</a></div>
+            <ul class="menu-list">
+                <div class="icon cancel-btn">
+                    <i class="fas fa-times"></i>
+                </div>
+                <li><a href="#">Home</a></li>
+                <li><button class="logout-btn">Logout</button></li>
+            </ul>
+            <div class="icon menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="about">
+        <div class="content">
+            <div class="wrapper bskt-wrap">
+                <div class="outer">
+                    <div class="card">
+                        <div class="content">
+                            <div class="img"><img src="images/basket.jpg" alt=""></div>
+                            <div class="details">
+                                <span class="name">Basket 1</span>
+                                <p>IT Industry</p>
+                            </div>
+                        </div>
+                        <div class="bskt-detls">
+                            <div class="details">
+                                <p>Investment Amount</p>
+                                <span class="name">$350.24</span>
+                            </div>
+                            <button class="btn detls-btn">Add To Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="card detls">
+                        <div class="detls-content">
+                            <div class="basket-info">
+                                <div class="urls-area">
+                                    <div class="title header">
+                                        <li>Stocks/Instruments</li>
+                                        <li>Wightage</li>
+                                    </div>
+                                    <div class="data">
+                                        <li>Tata Consultancy Services</li>
+                                        <li>8</li>
+                                    </div>
+                                    <div class="data">
+                                        <li>Infosys</li>
+                                        <li>6</li>
+                                    </div>
+                                    <div class="data">
+                                        <li>Capgemini</li>
+                                        <li>4</li>
+                                    </div>
+                                    <div class="data">
+                                        <li>Wipro</li>
+                                        <li>3</li>
+                                    </div>
+                                    <div class="data">
+                                        <li>Larsen & Toubro Infotech</li>
+                                        <li>2</li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="basket-info">
+                                <div id="piechart"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        const body = document.querySelector("body");
+        const navbar = document.querySelector(".navbar");
+        const menu = document.querySelector(".menu-list");
+        const menuBtn = document.querySelector(".menu-btn");
+        const cancelBtn = document.querySelector(".cancel-btn");
+        menuBtn.onclick = () => {
+            menu.classList.add("active");
+            menuBtn.classList.add("hide");
+            cancelBtn.classList.add("show");
+            body.classList.add("disabledScroll");
+        }
+        cancelBtn.onclick = () => {
+            menu.classList.remove("active");
+            menuBtn.classList.remove("hide");
+            cancelBtn.classList.remove("show");
+            body.classList.remove("disabledScroll");
+        }
+    </script>
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Stocks', 'Weightage'],
+                ['Tata Consultancy Services', 8],
+                ['Infosys', 6],
+                ['Capgemini', 4],
+                ['Wipro', 3],
+                ['Larsen & Toubro Infotech', 2]
+            ]);
+
+            // Optional; add a title and set the width and height of the chart
+            var options = { 'title': 'Stocks Breakout', 'width': 550, 'height': 400 };
+
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+</html>

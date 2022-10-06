@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmallCase | Register</title>
+    <link rel="stylesheet" th:href="@{/css/userAuth.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <div class="wrapper register">
+        <header class="brand">Small Case</header>
+        <h4 class="descp brand">Signup to your account</h4>
+        <form method="post" th:action="@{/users/add}" th:object="${applicationUser}">
+            <div class="field fName">
+                <div class="input-area">
+                    <input type="text" th:field="*{firstName}" placeholder="First Name">
+                    <i class="icon fas fa-user"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Please Fill Valid First Name</div>
+            </div>
+            <div class="field lName">
+                <div class="input-area">
+                    <input type="text" th:field="*{lastName}" placeholder="Last Name">
+                    <i class="icon fas fa-user"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Please Fill Valid Last Name</div>
+            </div>
+
+            <div class="field uName">
+                <div class="input-area">
+                    <input type="text" th:field="*{userName}" placeholder="User Name">
+                    <i class="icon fas fa-user"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Please Fill Valid User Name</div>
+            </div>
+            <div class="field password">
+                <div class="input-area">
+                    <input type="password" th:field="*{password}" placeholder="Password">
+                    <i class="icon fas fa-lock"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Please Fill Valid Password</div>
+            </div>
+            <input type="submit" value="Register">
+        </form>
+        <div class="sign-txt">Already have an account? <a href="/">Login now</a></div>
+    </div>
+    <script th:src="@{/js/registerscript.js}"></script>
+</body>
+</html>

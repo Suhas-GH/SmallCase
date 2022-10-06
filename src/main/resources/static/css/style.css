@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+/* custom scroll bar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+::selection{
+  background: rgb(0,123,255,0.3);
+}
+.content {
+    max-width: 1250px;
+    margin: auto;
+    padding: 0px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.detls-content{
+    width:100%;
+    display: flex;
+    align-items: center;
+}
+.basket-info{
+    width: 50%;
+}
+.navbar{
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  padding: 25px 0;
+  transition: all 0.3s ease;
+}
+.navbar.sticky {
+    padding: 10px 0;
+    background: linear-gradient(45deg, #007d78 80%, #ff9300 20%);
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.1);
+}
+.navbar .content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar .logo a{
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.navbar .menu-list{
+  display: inline-flex;
+}
+.menu-list li{
+  list-style: none;
+}
+.menu-list li a{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 25px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.menu-list li a:hover{
+  color: #000000;
+}
+.menu-list li .logout-btn {
+    margin-left: 25px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    background: #007d78;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+.menu-list li .logout-btn:hover {
+    background: #fff;
+    color: #ff9300;
+}
+.about{
+  padding: 80px 0;
+  background: #f7f7f7;
+}
+.about .title {
+    font-size: 35px;
+    font-weight: 700;
+    padding: 10px 0px;
+    color: #007d78;
+}
+.about p{
+  text-align: justify;
+}
+.icon {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+}
+.icon.cancel-btn{
+  position: absolute;
+  right: 30px;
+  top: 20px;
+}
+.navbar.sticky .icon.cancel-btn{
+  top: 10px;
+}
+
+.wrapper {
+    width: 80%;
+}
+
+    .wrapper .outer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .wrapper .card {
+        background: #fff;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        justify-content: space-between;
+        border-radius: 100px 20px 20px 100px;
+        box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+        margin: 10px;
+    }
+
+.card .content {
+    display: flex;
+    align-items: center;
+    margin: unset;
+}
+
+.wrapper .card .img {
+    height: 90px;
+    width: 90px;
+    position: absolute;
+    left: -5px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+}
+
+.card .img img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card .details {
+    margin-left: 80px;
+}
+
+.details span {
+    font-weight: 600;
+    font-size: 18px;
+}
+.card .btn {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    background: #007d78;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.card .btn:hover {
+    background: #ff9300;
+}
+
+.card .rmv:hover{
+    background: red !important;
+}
+
+.card a {
+    text-decoration: none;
+    padding: 7px 18px;
+    border-radius: 25px;
+    color: #fff;
+    background: linear-gradient(to bottom, #bea2e7 0%, #86b7e7 100%);
+    transition: all 0.3s ease;
+}
+
+.bskt-wrap{
+    width: 100%!important;
+}
+
+.bskt-detls{
+    display:flex;
+}
+
+.bskt-detls .details{
+    margin-right:50px;
+}
+
+.detls-btn{
+    margin-right:20px;
+}
+
+.detls{
+    border-radius: 10px !important;
+}
+
+.urls-area {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.urls-area::-webkit-scrollbar {
+    width: 0px;
+}
+
+.urls-area :is(.title, .data) {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.urls-area li {
+    width: 100%;
+    list-style: none;
+    border-right: 1px solid #ddd;
+}
+
+    .urls-area li:last-child {
+        border-right: 0px;
+    }
+
+.urls-area .title li {
+    text-align: center;
+    background: #f2f2f2;
+    padding: 10px 0;
+}
+
+.urls-area .data li {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break: break-all;
+}
+
+    .urls-area .data li:last-child a {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .urls-area .data li a:hover {
+        color: #20B2AA;
+        text-decoration: underline;
+    }
+
+    .urls-area .data li:last-child a:hover {
+        text-decoration: none;
+    }
+
+.urls-area .data:nth-child(odd) {
+    background: #f2f2f2;
+}
+
+.urls-area li:nth-child(1) {
+    max-width: 80%;
+}
+
+.urls-area li:nth-child(2) {
+    max-width: 25%;
+}
+.header{
+    font-size: 16px !important;
+    padding: 0px !important;
+}
+.card a:hover {
+    transform: scale(0.94);
+}
+
+@media (max-width: 868px) {
+    body.disabledScroll {
+        overflow: hidden;
+    }
+
+    .icon {
+        display: block;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        line-height: 50px;
+        border-radius: 50%;
+        z-index: 9;
+    }
+
+        .icon.cancel-btn {
+            display: none;
+        }
+
+            .icon.cancel-btn.show {
+                display: block;
+            }
+
+        .icon.hide {
+            display: none;
+        }
+
+    .navbar .menu-list {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100%;
+        background: #007d78;
+        display: block;
+        padding: 40px 0;
+        text-align: center;
+        clip-path: circle(25px at calc(100% - 55px) calc(0% + 50px));
+        transition: all 0.3s ease;
+    }
+
+    .navbar.sticky .menu-list {
+        clip-path: circle(25px at calc(100% - 55px) calc(0% + 35px));
+    }
+
+    .navbar .menu-list.active {
+        clip-path: circle(75%);
+    }
+
+    .navbar .menu-list li {
+        margin-top: 45px;
+    }
+
+        .navbar .menu-list li a {
+            font-size: 23px;
+        }
+}

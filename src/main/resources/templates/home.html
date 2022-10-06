@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Small Case | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+    <nav class="navbar sticky">
+        <div class="content">
+            <div class="logo"><a href="#">Small Case</a></div>
+            <ul class="menu-list">
+                <div class="icon cancel-btn">
+                    <i class="fas fa-times"></i>
+                </div>
+                <li><a href="#">Home</a></li>
+                <li><button class="logout-btn">Logout</button></li>
+            </ul>
+            <div class="icon menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="about">
+        <div class="content">
+            <div class="wrapper">
+                <div class="outer">
+                    <div class="card">
+                        <div class="content">
+                            <div class="img"><img src="images/basket.jpg" alt=""></div>
+                            <div class="details">
+                                <span class="name">Basket 1</span>
+                                <p>IT Industry</p>
+                            </div>
+                        </div>
+                        <button class="btn">View Basket</button>
+                    </div>
+                    <div class="card">
+                        <div class="content">
+                            <div class="img"><img src="images/basket.jpg" alt=""></div>
+                            <div class="details">
+                                <span class="name">Basket 2</span>
+                                <p>House of TATA</p>
+                            </div>
+                        </div>
+                        <button class="btn">View Basket</button>
+                    </div>
+                    <div class="card">
+                        <div class="content">
+                            <div class="img"><img src="images/basket.jpg" alt=""></div>
+                            <div class="details">
+                                <span class="name">Basket 3</span>
+                                <p>EV Industry</p>
+                            </div>
+                        </div>
+                        <button class="btn">View Basket</button>
+                    </div>
+                    <div class="card">
+                        <div class="content">
+                            <div class="img"><img src="images/basket.jpg" alt=""></div>
+                            <div class="details">
+                                <span class="name">Basket 4</span>
+                                <p>Health Care</p>
+                            </div>
+                        </div>
+                        <button class="btn">View Basket</button>
+                    </div>
+                    <div class="card">
+                        <div class="content">
+                            <div class="img"><img src="images/basket.jpg" alt=""></div>
+                            <div class="details">
+                                <span class="name">Basket 5</span>
+                                <p>Telecommunication</p>
+                            </div>
+                        </div>
+                        <button class="btn">View Basket</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const body = document.querySelector("body");
+        const navbar = document.querySelector(".navbar");
+        const menu = document.querySelector(".menu-list");
+        const menuBtn = document.querySelector(".menu-btn");
+        const cancelBtn = document.querySelector(".cancel-btn");
+        menuBtn.onclick = () => {
+            menu.classList.add("active");
+            menuBtn.classList.add("hide");
+            cancelBtn.classList.add("show");
+            body.classList.add("disabledScroll");
+        }
+        cancelBtn.onclick = () => {
+            menu.classList.remove("active");
+            menuBtn.classList.remove("hide");
+            cancelBtn.classList.remove("show");
+            body.classList.remove("disabledScroll");
+        }
+
+    </script>
+
+</body>
+</html>
