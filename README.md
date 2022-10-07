@@ -1,2 +1,0 @@
-# SmallCase
-Small Case POC
