@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Small Case | Basket Details</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" th:href=@{"css/style.css"}>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
     <nav class="navbar sticky">
         <div class="content">
-            <div class="logo"><a href="#">Small Case</a></div>
+            <div class="logo"><a th:href="@{/Home}">Small Case</a></div>
             <ul class="menu-list">
-                <li><a href="#">Home</a></li>
+                <li><a th:href="@{/Home}">Home</a></li>
                 <li><button class="logout-btn">Logout</button></li>
             </ul>
         </div>
@@ -22,12 +22,12 @@
         <div class="content">
             <div class="wrapper bskt-wrap">
                 <div class="outer">
-                    <div class="card">
+                    <div class="card" th:each="detail:${basketDetails}">
                         <div class="content">
-                            <div class="img"><img src="images/basket.jpg" alt=""></div>
+                            <div class="img"><img th:src="@{images/basket.jpg}" alt="Basket"></div>
                             <div class="details">
-                                <span class="name">Basket 1</span>
-                                <p>IT Industry</p>
+                                <span class="name" th:text="${detail.BasketName}"></span>
+                                <p th:text="${detail.Description}"></p>
                             </div>
                         </div>
                         <div class="bskt-detls">

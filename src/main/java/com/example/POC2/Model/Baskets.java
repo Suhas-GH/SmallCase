@@ -99,47 +99,4 @@ public class Baskets {
                 '}';
     }
 
-    /*
-    public Baskets() {
-    }
-
-    public Baskets(Long basketId, String basketName, String description, Set<StocksMapping> stocksMappings) {
-        BasketId = basketId;
-        BasketName = basketName;
-        Description = description;
-        this.stocksMappings = stocksMappings;
-    }
-
-    public Long getBasketId() {
-        return BasketId;
-    }
-
-    public void setBasketId(Long basketId) {
-        BasketId = basketId;
-    }
-
-    public String getBasketName() {
-        return BasketName;
-    }
-
-    public void setBasketName(String basketName) {
-        BasketName = basketName;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public Set<StocksMapping> getStocksMappings() {
-        return stocksMappings;
-    }
-
-    public void setStocksMappings(Set<StocksMapping> stocksMappings) {
-        this.stocksMappings = stocksMappings;
-    }
-     */
 }

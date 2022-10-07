@@ -24,13 +24,13 @@
                 <div class="outer">
                     <div class="card" th:each="basket:${basketList}">
                         <div class="content">
-                            <div class="img"><img src="images/basket.jpg" alt=""></div>
+                            <div class="img"><img src="images/basket.jpg" alt="Basket"></div>
                             <div class="details">
                                 <span class="name" th:text="${basket.BasketName}"></span>
                                 <p th:text="${basket.Description}"></p>
                             </div>
                         </div>
-                        <button th:onclick="@{location.href='/Basket/basket.BasketId'}" class="btn">View Basket</button>
+                        <button type="button" th:onclick="@{window.location.href='/BasketDetails/}+${basket.BasketId}+@{'}" class="btn">View Basket</button>
                     </div>
                 </div>
             </div>
