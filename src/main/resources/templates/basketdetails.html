@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Small Case | Basket Details</title>
-    <link rel="stylesheet" th:href=@{"css/style.css"}>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
@@ -24,7 +24,7 @@
                 <div class="outer">
                     <div class="card" th:each="detail:${basketDetails}">
                         <div class="content">
-                            <div class="img"><img th:src="@{images/basket.jpg}" alt="Basket"></div>
+                            <div class="img"><img src="../images/basket.jpg" alt="Basket"></div>
                             <div class="details">
                                 <span class="name" th:text="${detail.BasketName}"></span>
                                 <p th:text="${detail.Description}"></p>

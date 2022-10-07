@@ -30,13 +30,15 @@ public class ViewController {
     @RequestMapping("/Home")
     public String Home(Model model){
         model.addAttribute("basketList",basketController.getBaskets());
+        //System.out.println(basketController.getBaskets());
         return "home";
     }
 
     @GetMapping("/BasketDetails/{BasketId}")
     public String BasketDetails(Model model, @PathVariable Long BasketId){
-        model.addAttribute("basketDetails",basketController.getBasketDetails(BasketId));
-        System.out.println(basketController.getBasketDetails(BasketId));
+        Baskets baskets = basketController.getBasketDetails(BasketId).orElseThrow(() -> new IllegalArgumentException("Invalid Basket Id:" + BasketId));
+        model.addAttribute("basketDetails",baskets);
+        //System.out.println(basketController.getBasketDetails(BasketId));
         return "basketdetails";
     }
 }
