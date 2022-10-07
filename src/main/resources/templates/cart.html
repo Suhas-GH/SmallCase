@@ -12,15 +12,9 @@
         <div class="content">
             <div class="logo"><a href="#">Small Case</a></div>
             <ul class="menu-list">
-                <div class="icon cancel-btn">
-                    <i class="fas fa-times"></i>
-                </div>
                 <li><a href="#">Home</a></li>
                 <li><button class="logout-btn">Logout</button></li>
             </ul>
-            <div class="icon menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
         </div>
     </nav>
 
@@ -83,27 +77,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        const body = document.querySelector("body");
-        const navbar = document.querySelector(".navbar");
-        const menu = document.querySelector(".menu-list");
-        const menuBtn = document.querySelector(".menu-btn");
-        const cancelBtn = document.querySelector(".cancel-btn");
-        menuBtn.onclick = () => {
-            menu.classList.add("active");
-            menuBtn.classList.add("hide");
-            cancelBtn.classList.add("show");
-            body.classList.add("disabledScroll");
-        }
-        cancelBtn.onclick = () => {
-            menu.classList.remove("active");
-            menuBtn.classList.remove("hide");
-            cancelBtn.classList.remove("show");
-            body.classList.remove("disabledScroll");
-        }
-
-    </script>
-
 </body>
 </html>

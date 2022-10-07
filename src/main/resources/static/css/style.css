@@ -103,21 +103,6 @@
 .about p{
   text-align: justify;
 }
-.icon {
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-    display: none;
-}
-.icon.cancel-btn{
-  position: absolute;
-  right: 30px;
-  top: 20px;
-}
-.navbar.sticky .icon.cancel-btn{
-  top: 10px;
-}
-
 .wrapper {
     width: 80%;
 }
@@ -299,62 +284,4 @@
 }
 .card a:hover {
     transform: scale(0.94);
-}
-
-@media (max-width: 868px) {
-    body.disabledScroll {
-        overflow: hidden;
-    }
-
-    .icon {
-        display: block;
-        height: 50px;
-        width: 50px;
-        text-align: center;
-        line-height: 50px;
-        border-radius: 50%;
-        z-index: 9;
-    }
-
-        .icon.cancel-btn {
-            display: none;
-        }
-
-            .icon.cancel-btn.show {
-                display: block;
-            }
-
-        .icon.hide {
-            display: none;
-        }
-
-    .navbar .menu-list {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 100%;
-        background: #007d78;
-        display: block;
-        padding: 40px 0;
-        text-align: center;
-        clip-path: circle(25px at calc(100% - 55px) calc(0% + 50px));
-        transition: all 0.3s ease;
-    }
-
-    .navbar.sticky .menu-list {
-        clip-path: circle(25px at calc(100% - 55px) calc(0% + 35px));
-    }
-
-    .navbar .menu-list.active {
-        clip-path: circle(75%);
-    }
-
-    .navbar .menu-list li {
-        margin-top: 45px;
-    }
-
-        .navbar .menu-list li a {
-            font-size: 23px;
-        }
 }
