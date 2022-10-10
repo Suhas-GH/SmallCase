@@ -2,13 +2,14 @@ package com.example.POC2.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Stocks {
+public class Stocks implements Comparable<Stocks>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "StockId")
@@ -67,4 +68,18 @@ public class Stocks {
         this.stocksMapping = stocksMapping;
     }
 
+    @Override
+    public String toString() {
+        return "Stocks{" +
+                "StockId=" + StockId +
+                ", StockName='" + StockName + '\'' +
+                ", StockPrice=" + StockPrice +
+                ", stocksMapping=" + stocksMapping +
+                '}';
+    }
+
+    @Override
+    public int compareTo(@NotNull Stocks o) {
+        return this.getStockId().compareTo(o.getStockId());
+    }
 }

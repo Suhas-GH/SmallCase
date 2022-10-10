@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -81,4 +83,12 @@ public class BasketService {
         return basketsRepository.findById(basketId);
     }
 
+    public List<Long> getMappingIds(Baskets basket){
+        List<Long> Ids = new ArrayList<>();
+        Set<StocksMapping> stocksMappingSet = basket.getStocksMappings();
+        stocksMappingSet.forEach(x -> {
+            Ids.add(x.getMappingId());
+        });
+        return Ids;
+    }
 }

@@ -45,27 +45,11 @@
                                 <div class="urls-area">
                                     <div class="title header">
                                         <li>Stocks/Instruments</li>
-                                        <li>Wightage</li>
+                                        <li>Weightage</li>
                                     </div>
-                                    <div class="data">
-                                        <li>Tata Consultancy Services</li>
-                                        <li>8</li>
-                                    </div>
-                                    <div class="data">
-                                        <li>Infosys</li>
-                                        <li>6</li>
-                                    </div>
-                                    <div class="data">
-                                        <li>Capgemini</li>
-                                        <li>4</li>
-                                    </div>
-                                    <div class="data">
-                                        <li>Wipro</li>
-                                        <li>3</li>
-                                    </div>
-                                    <div class="data">
-                                        <li>Larsen & Toubro Infotech</li>
-                                        <li>2</li>
+                                    <div class="data" th:each="stock:${stockDetails}">
+                                        <li th:text="${stock.StockName}"></li>
+                                        <li th:each="mapping:${stock.stocksMapping}" th:text="${mapping.QTY}"></li>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +57,6 @@
                                 <div id="piechart"></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -83,21 +66,24 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <script type="text/javascript">
+    <script th:inline="javascript" type="text/javascript">
         // Load google charts
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
 
+        //Dynamic Data
+        var stocksData = [];
+        stocksData.push(['Stocks', 'Weightage']);
+        /*<![CDATA[*/
+        /*[# th:each="stock:${stockDetails}"]*/
+        stocksData.push([ /*[[${stock.StockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[[${mapping.QTY}]]*//*[/]*/]);
+        /*[/]*/
+        /*]]>*/
+
+
         // Draw the chart and set the chart values
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Stocks', 'Weightage'],
-                ['Tata Consultancy Services', 8],
-                ['Infosys', 6],
-                ['Capgemini', 4],
-                ['Wipro', 3],
-                ['Larsen & Toubro Infotech', 2]
-            ]);
+            var data = google.visualization.arrayToDataTable(stocksData);
 
             // Optional; add a title and set the width and height of the chart
             var options = { 'title': 'Stocks Breakout', 'width': 550, 'height': 400 };

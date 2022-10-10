@@ -8,6 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -50,5 +56,17 @@ public class StocksService {
         else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    public List<Stocks> getStocksByMapping(List<Long> MappingId){
+        List<Long> stockIds = new ArrayList<>();
+        MappingId.forEach(x->{
+            stockIds.add(stocksMappingRepository.getStockId(x));
+        });
+        List<Stocks> stocksList = new ArrayList<>();
+        stockIds.forEach(x->{
+            stocksList.add(stocksRepository.findById(x).orElseThrow(() -> new IllegalArgumentException("Invalid Mapping Id:" + x)));
+        });
+        return stocksList;
     }
 }
