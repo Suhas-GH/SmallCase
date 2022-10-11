@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface CartMappingRepository extends JpaRepository<CartMapping,Long> {
     @Query("SELECT COUNT(*) FROM CartMapping WHERE cart_id = ?1")
@@ -22,4 +24,7 @@ public interface CartMappingRepository extends JpaRepository<CartMapping,Long> {
 
     @Query("SELECT COUNT(*) FROM CartMapping WHERE basket_id = ?1")
     Long existsByBasketId(Long BasketId);
+
+    @Query("FROM CartMapping WHERE cart_id = ?1")
+    List<CartMapping> findAllByCart_CartId(Long CartId);
 }

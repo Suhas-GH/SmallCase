@@ -3,9 +3,17 @@ package com.example.POC2.Controller;
 import com.example.POC2.Model.ApplicationUser;
 import com.example.POC2.Model.Baskets;
 import com.example.POC2.Model.Stocks;
+import com.example.POC2.Repository.ApplicationUserRepository;
+import com.example.POC2.Repository.CartRepository;
 import com.example.POC2.Service.BasketService;
+import com.example.POC2.Service.CartService;
 import com.example.POC2.Service.StocksService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +34,15 @@ public class ViewController {
 
     @Autowired
     private StocksService stocksService;
+
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private ApplicationUserRepository userRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     @RequestMapping("/Register")
     public String Registration(Model model){
@@ -57,5 +74,29 @@ public class ViewController {
         Float InvestmentAmount = stocksService.getInvestmentAmount(Stocks);
         model.addAttribute("investmentAmount",InvestmentAmount);
         return "basketdetails";
+    }
+
+    @GetMapping("/Cart")
+    public String Cart(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String UserName = authentication.getName();
+        ApplicationUser user = userRepository.findByUserName(UserName);
+        Long UserId = user.getUserId();
+        if (cartRepository.existsByUserId(UserId)){
+            model.addAttribute("cartBaskets", cartService.getUsersCart(UserId));
+        }
+        return "cart";
+    }
+
+    @GetMapping("/addtocart/{BasketId}")
+    public String addtocart(@PathVariable Long BasketId){
+        cartService.addToCart(BasketId);
+        return "redirect:../Cart";
+    }
+
+    @GetMapping("/removefromcart/{BasketId}")
+    private String removefromcart(@PathVariable Long BasketId){
+        cartService.deleteFromCart(BasketId);
+        return "redirect:../Cart";
     }
 }

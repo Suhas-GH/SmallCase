@@ -91,8 +91,9 @@
     color: #ff9300;
 }
 .about{
-  padding: 80px 0;
-  background: #f7f7f7;
+    padding: 80px 0;
+    background: #f7f7f7;
+    height: 100vh;
 }
 .about .title {
     font-size: 35px;

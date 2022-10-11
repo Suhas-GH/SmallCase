@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -32,7 +34,6 @@ public class CartService {
         String UserName = authentication.getName();
         ApplicationUser user = userRepository.findByUserName(UserName);
         Long UserId = user.getUserId();
-        //Long UserId = Long.valueOf(1);
         if(UserId!=null && BasketId!=null && basketsRepository.existsById(BasketId)){
             Baskets baskets = new Baskets(BasketId);
             if(cartRepository.existsByUserId(UserId)){
@@ -64,7 +65,6 @@ public class CartService {
         String UserName = authentication.getName();
         ApplicationUser user = userRepository.findByUserName(UserName);
         Long UserId = user.getUserId();
-        //Long UserId = Long.valueOf(1);
         if(UserId!=null && BasketId!=null && cartMappingRepository.existsByBasketId(BasketId)!=0){
             Cart cart = cartRepository.findByUserId(UserId);
             Long count = cartMappingRepository.cartCount(cart.getCartId());
@@ -77,6 +77,15 @@ public class CartService {
         }else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    public List<Baskets> getUsersCart(Long UserId){
+        Long CartId = cartRepository.findByUserId(UserId).getCartId();
+        List<Long> basketIds = cartMappingRepository.findAllByCart_CartId(CartId)
+                .stream().map(x->x.getBaskets().getBasketId())
+                .collect(Collectors.toList());
+        List<Baskets> baskets = basketIds.stream().map(x->basketsRepository.findById(x).orElseThrow(() -> new IllegalArgumentException("Invalid Basket Id:" + x))).collect(Collectors.toList());
+        return baskets;
     }
 }
 
