@@ -66,6 +66,7 @@ public class ViewController {
     public String BasketDetails(Model model, @PathVariable Long BasketId){
         Baskets baskets = basketController.getBasketDetails(BasketId).orElseThrow(() -> new IllegalArgumentException("Invalid Basket Id:" + BasketId));
         model.addAttribute("basketDetails",baskets);
+        model.addAttribute("basketId",BasketId);
         List<Long> MappingIds = basketService.getMappingIds(baskets);
         Collections.sort(MappingIds);
         List<Stocks> Stocks = stocksService.getStocksByMapping(MappingIds);

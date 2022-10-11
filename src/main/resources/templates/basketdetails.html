@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="data" th:each="stock:${stockDetails}">
                                         <li th:text="${stock.StockName}"></li>
-                                        <li th:each="mapping:${stock.stocksMapping}" th:text="${mapping.QTY}"></li>
+                                        <li th:each="mapping:${stock.stocksMapping}" th:if="${mapping.baskets.BasketId==basketId}" th:text="${mapping.QTY}"></li>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
         stocksData.push(['Stocks', 'Weightage']);
         /*<![CDATA[*/
         /*[# th:each="stock:${stockDetails}"]*/
-        stocksData.push([ /*[[${stock.StockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[[${mapping.QTY}]]*//*[/]*/]);
+        stocksData.push([ /*[[${stock.StockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[# th:if="${mapping.baskets.BasketId==basketId}"]*//*[[${mapping.QTY}]]*//*[/]*//*[/]*/]);
         /*[/]*/
         /*]]>*/
 
