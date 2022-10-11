@@ -69,4 +69,12 @@ public class StocksService {
         });
         return stocksList;
     }
+
+    public Float getInvestmentAmount(List<Stocks> Stocks){
+        Float InvestmentAmount = 0F;
+        for (Stocks stock : Stocks){
+            InvestmentAmount = InvestmentAmount + stock.getStockPrice();
+        }
+        return InvestmentAmount;
+    }
 }
