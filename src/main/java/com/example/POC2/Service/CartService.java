@@ -80,11 +80,9 @@ public class CartService {
 
     public List<Baskets> getUsersCart(Long UserId){
         Long CartId = cartRepository.findByUserId(UserId).getCartId();
-        //System.out.println("Cart Id : " + CartId);
         List<Long> basketIds = cartMappingRepository.findAllByCart_CartId(CartId)
                 .stream().map(x->x.getBaskets().getBasketId())
                 .collect(Collectors.toList());
-        //System.out.println("Basket Ids : " + basketIds);
         List<Baskets> baskets = basketIds.stream().map(x->basketsRepository.findById(x).orElseThrow(() -> new IllegalArgumentException("Invalid Basket Id:" + x))).collect(Collectors.toList());
         return baskets;
     }
