@@ -11,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -70,10 +68,15 @@ public class StocksService {
         return stocksList;
     }
 
-    public Float getInvestmentAmount(List<Stocks> Stocks){
+    public Float getInvestmentAmount(List<Stocks> Stocks, Long BasketId){
         Float InvestmentAmount = 0F;
         for (Stocks stock : Stocks){
-            InvestmentAmount = InvestmentAmount + stock.getStockPrice();
+            Set<StocksMapping> mappings = stock.getStocksMapping();
+            for (StocksMapping stocksMapping : mappings){
+                if (stocksMapping.getBaskets().getBasketId()==BasketId){
+                    InvestmentAmount = InvestmentAmount + (stock.getStockPrice()*stocksMapping.getQTY());
+                }
+            }
         }
         return InvestmentAmount;
     }

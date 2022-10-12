@@ -72,7 +72,7 @@ public class ViewController {
         List<Stocks> Stocks = stocksService.getStocksByMapping(MappingIds);
         Collections.sort(Stocks);
         model.addAttribute("stockDetails",Stocks);
-        Float InvestmentAmount = stocksService.getInvestmentAmount(Stocks);
+        Float InvestmentAmount = stocksService.getInvestmentAmount(Stocks,BasketId);
         model.addAttribute("investmentAmount",InvestmentAmount);
         return "basketdetails";
     }
