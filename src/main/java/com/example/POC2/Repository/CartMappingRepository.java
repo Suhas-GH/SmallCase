@@ -11,20 +11,20 @@ import java.util.List;
 
 @Repository
 public interface CartMappingRepository extends JpaRepository<CartMapping,Long> {
-    @Query("SELECT COUNT(*) FROM CartMapping WHERE cart_id = ?1")
+    @Query("SELECT COUNT(cm) FROM CartMapping cm WHERE cm.cart.CartId = ?1")
     Long cartCount(Long CartId);
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM CartMapping WHERE basket_id = ?1 AND cart_id = ?2")
+    @Query("DELETE FROM CartMapping WHERE baskets.BasketId = ?1 AND baskets.BasketId = ?2")
     void deleteBasketFromCart(Long BasketId, Long CartId);
 
-    @Query("SELECT COUNT(*) FROM CartMapping WHERE cart_id = ?1 AND basket_id = ?2")
+    @Query("SELECT COUNT(cm) FROM CartMapping cm WHERE cm.cart.CartId = ?1 AND cm.baskets.BasketId = ?2")
     Long existsByCartIdAndBasketId(Long CartId, Long BasketId);
 
-    @Query("SELECT COUNT(*) FROM CartMapping WHERE basket_id = ?1")
+    @Query("SELECT COUNT(cm) FROM CartMapping cm WHERE cm.baskets.BasketId = ?1")
     Long existsByBasketId(Long BasketId);
 
-    @Query("FROM CartMapping WHERE cart_id = ?1")
+    @Query("FROM CartMapping WHERE baskets.BasketId = ?1")
     List<CartMapping> findAllByCart_CartId(Long CartId);
 }

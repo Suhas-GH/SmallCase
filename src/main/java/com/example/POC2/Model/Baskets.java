@@ -3,7 +3,6 @@ package com.example.POC2.Model;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

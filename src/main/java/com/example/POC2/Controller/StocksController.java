@@ -2,15 +2,10 @@ package com.example.POC2.Controller;
 
 
 import com.example.POC2.Model.Stocks;
-import com.example.POC2.Model.StocksMapping;
-import com.example.POC2.Repository.StocksMappingRepository;
-import com.example.POC2.Repository.StocksRepository;
 import com.example.POC2.Service.StocksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 
 @RestController

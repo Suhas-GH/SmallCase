@@ -12,6 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface BasketsRepository extends JpaRepository<Baskets, Long> {
     @Transactional
     @Modifying
-    @Query("UPDATE Baskets SET basket_name = ?1 , description = ?2 WHERE basket_id = ?3")
+    @Query("UPDATE Baskets SET BasketName = ?1 , Description = ?2 WHERE BasketId = ?3")
     void updateDetails(String basketName, String basketDescription, Long basketId);
 }
