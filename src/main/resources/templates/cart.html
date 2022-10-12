@@ -13,7 +13,7 @@
             <div class="logo"><a th:href="@{/Home}">Small Case</a></div>
             <ul class="menu-list">
                 <li><a th:href="@{/Home}">Home</a></li>
-                <li><button class="logout-btn">Logout</button></li>
+                <li><button th:onclick="@{window.location.href='/logout'}" class="logout-btn">Logout</button></li>
             </ul>
         </div>
     </nav>
