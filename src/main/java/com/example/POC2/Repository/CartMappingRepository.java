@@ -16,7 +16,7 @@ public interface CartMappingRepository extends JpaRepository<CartMapping,Long> {
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM CartMapping WHERE baskets.BasketId = ?1 AND baskets.BasketId = ?2")
+    @Query("DELETE FROM CartMapping WHERE baskets.BasketId = ?1 AND cart.CartId = ?2")
     void deleteBasketFromCart(Long BasketId, Long CartId);
 
     @Query("SELECT COUNT(cm) FROM CartMapping cm WHERE cm.cart.CartId = ?1 AND cm.baskets.BasketId = ?2")
@@ -25,6 +25,6 @@ public interface CartMappingRepository extends JpaRepository<CartMapping,Long> {
     @Query("SELECT COUNT(cm) FROM CartMapping cm WHERE cm.baskets.BasketId = ?1")
     Long existsByBasketId(Long BasketId);
 
-    @Query("FROM CartMapping WHERE baskets.BasketId = ?1")
+    @Query("FROM CartMapping WHERE cart.CartId = ?1")
     List<CartMapping> findAllByCart_CartId(Long CartId);
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public interface StocksRepository extends JpaRepository<Stocks, Long> {
     @Transactional
     @Modifying
-    @Query("UPDATE Stocks SET StockName = ?1 , StockPrice = ?2 WHERE StockId = ?3")
+    @Query("UPDATE Stocks s SET s.StockName = ?1 , s.StockPrice = ?2 WHERE s.StockId = ?3")
     void modifyStocks(String StocksName, Float StockPrice, Long StockId);
     @Query("SELECT COUNT(s) FROM Stocks s WHERE s.StockId IN ?1")
     int checkStocks(List<Long> Ids);
