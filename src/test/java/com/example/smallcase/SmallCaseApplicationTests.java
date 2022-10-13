@@ -1,5 +1,5 @@
 package com.example.smallcase;
-
+/*
 import com.example.smallcase.model.*;
 import com.example.smallcase.repository.*;
 import com.example.smallcase.service.BasketService;
@@ -308,3 +308,5 @@ class SmallCaseApplicationTests {
 		assertEquals(basketsList,cartService.getUsersCart(user.getUserId()));
 	}
 }
+
+ */

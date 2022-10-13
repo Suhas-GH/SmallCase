@@ -3,7 +3,6 @@ package com.example.smallcase.controller;
 import com.example.smallcase.model.Baskets;
 import com.example.smallcase.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,18 +16,18 @@ public class BasketController {
     private BasketService basketService;
 
     @PostMapping("/baskets/add")
-    public ResponseEntity addBasket(@RequestBody Baskets baskets){
-        return basketService.addBaskets(baskets);
+    public void addBasket(@RequestBody Baskets baskets){
+        basketService.addBaskets(baskets);
     }
 
     @PutMapping("/baskets/modify/{basketId}")
-    public ResponseEntity modifyBaskets(@PathVariable Long basketId, @RequestBody Baskets baskets){
-        return basketService.modifyBasket(basketId,baskets);
+    public void modifyBaskets(@PathVariable Long basketId, @RequestBody Baskets baskets){
+        basketService.modifyBasket(basketId,baskets);
     }
 
     @DeleteMapping("/baskets/delete/{basketId}")
-    public ResponseEntity deleteBasket(@PathVariable Long basketId){
-         return basketService.deleteBasket(basketId);
+    public void deleteBasket(@PathVariable Long basketId){
+         basketService.deleteBasket(basketId);
     }
 
     @GetMapping("/getBaskets")

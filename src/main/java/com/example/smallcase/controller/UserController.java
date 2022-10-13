@@ -16,8 +16,7 @@ public class UserController {
 
     @PostMapping(value = "/users/add",consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public String createUser(ApplicationUser user){
-        ResponseEntity response = userService.registerUser(user);
-        if(response.getStatusCodeValue()==201){
+        if(userService.registerUser(user)){
             return "redirect:/";
         }
         else {

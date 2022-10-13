@@ -3,8 +3,6 @@ package com.example.smallcase.service;
 import com.example.smallcase.model.*;
 import com.example.smallcase.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,7 @@ public class CartService {
     private ApplicationUserRepository userRepository;
 
 
-    public ResponseEntity addToCart(Long basketId){
+    public void addToCart(Long basketId){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         ApplicationUser user = userRepository.findByUserName(userName);
@@ -40,9 +38,6 @@ public class CartService {
                 if(count==0){
                     CartMapping cartMapping = new CartMapping(baskets,cart);
                     cartMappingRepository.save(cartMapping);
-                    return new ResponseEntity<>(HttpStatus.CREATED);
-                }else {
-                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
                 }
             }else {
                 CartMapping cartMapping = new CartMapping(baskets);
@@ -50,15 +45,11 @@ public class CartService {
                 cartMappingList.add(cartMapping);
                 Cart cart = new Cart(userId,cartMappingList);
                 cartRepository.save(cart);
-                return new ResponseEntity<>(HttpStatus.CREATED);
             }
-        }
-        else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    public ResponseEntity deleteFromCart(Long basketId){
+    public void deleteFromCart(Long basketId){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         ApplicationUser user = userRepository.findByUserName(userName);
@@ -71,9 +62,6 @@ public class CartService {
             }else {
                 cartMappingRepository.deleteBasketFromCart(basketId,cart.getCartId());
             }
-            return new ResponseEntity<>(HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
