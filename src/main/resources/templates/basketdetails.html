@@ -14,7 +14,7 @@
             <div class="logo"><a th:href="@{/Home}">Small Case</a></div>
             <ul class="menu-list">
                 <li><a th:href="@{/Home}">Home</a></li>
-                <li><a th:href="@{/Cart}"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a th:href="@{/Cart}"><i class="fas fa-shopping-cart" aria-hidden="true"></i></a></li>
                 <li><button th:onclick="@{window.location.href='/logout'}" class="logout-btn">Logout</button></li>
             </ul>
         </div>
@@ -35,7 +35,7 @@
                         <div class="bskt-detls">
                             <div class="details">
                                 <p>Investment Amount</p>
-                                <span class="name"><i class="fas fa-euro-sign"></i></span>
+                                <span class="name"><i class="fas fa-euro-sign" aria-hidden="true"></i></span>
                                 <span class="name" th:text="${investmentAmount}"></span>
                             </div>
                             <button class="btn detls-btn" th:onclick="@{window.location.href='../addtocart/}+${detail.BasketId}+@{'}">Add To Cart</button>
@@ -45,14 +45,18 @@
                     <div class="card detls">
                         <div class="detls-content">
                             <div class="basket-info">
-                                <div class="urls-area">
+                                <div class="weightage-table">
                                     <div class="title header">
-                                        <li>Stocks/Instruments</li>
-                                        <li>Weightage</li>
+                                        <ul>
+                                            <li>Stocks/Instruments</li>
+                                            <li>Weightage</li>
+                                        </ul>
                                     </div>
                                     <div class="data" th:each="stock:${stockDetails}">
-                                        <li th:text="${stock.StockName}"></li>
-                                        <li th:each="mapping:${stock.stocksMapping}" th:if="${mapping.baskets.BasketId==basketId}" th:text="${mapping.QTY}"></li>
+                                        <ul>
+                                            <li th:text="${stock.StockName}"></li>
+                                            <li th:each="mapping:${stock.stocksMapping}" th:if="${mapping.baskets.BasketId==basketId}" th:text="${mapping.qty}"></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +83,7 @@
         stocksData.push(['Stocks', 'Weightage']);
         /*<![CDATA[*/
         /*[# th:each="stock:${stockDetails}"]*/
-        stocksData.push([ /*[[${stock.StockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[# th:if="${mapping.baskets.BasketId==basketId}"]*//*[[${mapping.QTY}]]*//*[/]*//*[/]*/]);
+        stocksData.push([ /*[[${stock.StockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[# th:if="${mapping.baskets.BasketId==basketId}"]*//*[[${mapping.qty}]]*//*[/]*//*[/]*/]);
         /*[/]*/
         /*]]>*/
 

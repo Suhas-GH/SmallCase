@@ -200,7 +200,7 @@
     border-radius: 10px !important;
 }
 
-.urls-area {
+.weightage-table {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 5px;
@@ -208,33 +208,37 @@
     overflow-y: scroll;
 }
 
-.urls-area::-webkit-scrollbar {
+.weightage-table::-webkit-scrollbar{
     width: 0px;
 }
 
-.urls-area :is(.title, .data) {
+.weightage-table :is(.title, .data) {
     display: flex;
     width: 100%;
     justify-content: space-between;
 }
 
-.urls-area li {
+.weightage-table ul {
+    display: contents;
+}
+
+.weightage-table li {
     width: 100%;
     list-style: none;
     border-right: 1px solid #ddd;
 }
 
-    .urls-area li:last-child {
+    .weightage-table li:last-child {
         border-right: 0px;
     }
 
-.urls-area .title li {
+.weightage-table .title li {
     text-align: center;
     background: #f2f2f2;
     padding: 10px 0;
 }
 
-.urls-area .data li {
+.weightage-table .data li {
     padding: 8px 10px;
     display: flex;
     align-items: center;
@@ -242,7 +246,7 @@
     word-break: break-all;
 }
 
-    .urls-area .data li:last-child a {
+    .weightage-table .data li:last-child a {
         height: 100%;
         width: 100%;
         display: flex;
@@ -250,24 +254,24 @@
         justify-content: center;
     }
 
-    .urls-area .data li a:hover {
+    .weightage-table .data li a:hover {
         color: #20B2AA;
         text-decoration: underline;
     }
 
-    .urls-area .data li:last-child a:hover {
+    .weightage-table .data li:last-child a:hover {
         text-decoration: none;
     }
 
-.urls-area .data:nth-child(odd) {
+.weightage-table .data:nth-child(odd) {
     background: #f2f2f2;
 }
 
-.urls-area li:nth-child(1) {
+.weightage-table li:nth-child(1) {
     max-width: 80%;
 }
 
-.urls-area li:nth-child(2) {
+.weightage-table li:nth-child(2) {
     max-width: 25%;
 }
 .header{
