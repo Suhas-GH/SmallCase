@@ -15,7 +15,6 @@ public class ApplicationUser {
     @Column(name = "LastName")
     private String lastName;
 
-    //@Column(name = "UserName", unique = true)
     @Column(name = "UserName")
     private String userName;
 
