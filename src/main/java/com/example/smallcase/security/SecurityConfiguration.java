@@ -55,7 +55,7 @@ public class SecurityConfiguration {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/").usernameParameter("UserName").passwordParameter("Password")
+                .loginPage("/").usernameParameter("userName").passwordParameter("password")
                 .defaultSuccessUrl("/home", false)
                 .and()
                 .logout().permitAll();

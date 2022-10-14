@@ -1,5 +1,5 @@
 const form = document.querySelector("form");
-uField = form.querySelector(".uName"),
+uField = form.querySelector(".userName"),
 uInput = uField.querySelector("input"),
 pField = form.querySelector(".password"),
 pInput = pField.querySelector("input");

@@ -1,10 +1,10 @@
 const form = document.querySelector("form");
-fField = form.querySelector(".fName"),
+fField = form.querySelector(".firstName"),
 fInput = fField.querySelector("input"),
-lField = form.querySelector(".lName"),
+lField = form.querySelector(".lastName"),
 lInput = lField.querySelector("input"),
 
-uField = form.querySelector(".uName"),
+uField = form.querySelector(".userName"),
 uInput = uField.querySelector("input"),
 pField = form.querySelector(".password"),
 pInput = pField.querySelector("input");

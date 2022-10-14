@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
 }
-.detls-content{
+.details-content{
     width:100%;
     display: flex;
     align-items: center;
@@ -180,23 +180,23 @@
     transition: all 0.3s ease;
 }
 
-.bskt-wrap{
+.basket-wrap{
     width: 100%!important;
 }
 
-.bskt-detls{
+.basket-details{
     display:flex;
 }
 
-.bskt-detls .details{
+.basket-details .details{
     margin-right:50px;
 }
 
-.detls-btn{
+.details-btn{
     margin-right:20px;
 }
 
-.detls{
+.details{
     border-radius: 10px !important;
 }
 
