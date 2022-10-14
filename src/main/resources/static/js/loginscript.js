@@ -19,7 +19,7 @@ form.onsubmit = (e) => {
     pInput.onkeyup = () => { checkPass(); } //calling checkPassword function on pass input keyup
 
     function checkUName(){ //checkUName function
-        if (uInput.value == "") { //if uname is empty then add error and remove valid class
+        if (uInput.value === "") { //if uname is empty then add error and remove valid class
             uField.classList.add("error");
             uField.classList.remove("valid");
         } else { //if uname is empty then remove error and add valid class
@@ -29,7 +29,7 @@ form.onsubmit = (e) => {
     }
 
     function checkPass(){ //checkPass function
-        if(pInput.value == ""){ //if pass is empty then add error and remove valid class
+        if(pInput.value === ""){ //if pass is empty then add error and remove valid class
             pField.classList.add("error");
             pField.classList.remove("valid");
         }else{ //if pass is empty then remove error and add valid class
