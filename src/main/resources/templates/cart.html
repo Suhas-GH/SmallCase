@@ -29,11 +29,11 @@
                         <div class="content">
                             <div class="img"><img src="images/basket.jpg" alt=""></div>
                             <div class="details">
-                                <span class="name"th:text="${detail.BasketName}"></span>
-                                <p th:text="${detail.Description}"></p>
+                                <span class="name"th:text="${detail.basketName}"></span>
+                                <p th:text="${detail.description}"></p>
                             </div>
                         </div>
-                        <button class="btn rmv" th:onclick="@{window.location.href='removefromcart/}+${detail.BasketId}+@{'}">Remove Basket</button>
+                        <button class="btn rmv" th:onclick="@{window.location.href='removefromcart/}+${detail.basketId}+@{'}">Remove Basket</button>
                     </div>
                 </div>
             </div>

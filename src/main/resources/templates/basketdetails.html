@@ -28,8 +28,8 @@
                         <div class="content">
                             <div class="img"><img src="../images/basket.jpg" alt="Basket"></div>
                             <div class="details">
-                                <span class="name" th:text="${detail.BasketName}"></span>
-                                <p th:text="${detail.Description}"></p>
+                                <span class="name" th:text="${detail.basketName}"></span>
+                                <p th:text="${detail.description}"></p>
                             </div>
                         </div>
                         <div class="bskt-detls">
@@ -38,7 +38,7 @@
                                 <span class="name"><i class="fas fa-euro-sign" aria-hidden="true"></i></span>
                                 <span class="name" th:text="${investmentAmount}"></span>
                             </div>
-                            <button class="btn detls-btn" th:onclick="@{window.location.href='../addtocart/}+${detail.BasketId}+@{'}">Add To Cart</button>
+                            <button class="btn detls-btn" th:onclick="@{window.location.href='../addtocart/}+${detail.basketId}+@{'}">Add To Cart</button>
                         </div>
                     </div>
 
@@ -54,8 +54,8 @@
                                     </div>
                                     <div class="data" th:each="stock:${stockDetails}">
                                         <ul>
-                                            <li th:text="${stock.StockName}"></li>
-                                            <li th:each="mapping:${stock.stocksMapping}" th:if="${mapping.baskets.BasketId==basketId}" th:text="${mapping.qty}"></li>
+                                            <li th:text="${stock.stockName}"></li>
+                                            <li th:each="mapping:${stock.stocksMapping}" th:if="${mapping.baskets.basketId==basketId}" th:text="${mapping.qty}"></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
         stocksData.push(['Stocks', 'Weightage']);
         /*<![CDATA[*/
         /*[# th:each="stock:${stockDetails}"]*/
-        stocksData.push([ /*[[${stock.StockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[# th:if="${mapping.baskets.BasketId==basketId}"]*//*[[${mapping.qty}]]*//*[/]*//*[/]*/]);
+        stocksData.push([ /*[[${stock.stockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[# th:if="${mapping.baskets.basketId==basketId}"]*//*[[${mapping.qty}]]*//*[/]*//*[/]*/]);
         /*[/]*/
         /*]]>*/
 
