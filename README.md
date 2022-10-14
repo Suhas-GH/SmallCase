@@ -1,4 +1,4 @@
-# SmallCase# SmallCase
+# SmallCase
 Small case is basket of stocks that reflects an idea of buying many stocks at one time. smallcases are modern investment products that help you build a low-cost, long-term & diversified portfolio easily. Created by professionals, Banks or customers, each smallcase is a ready-made basket of stocks that reflects a theme, strategy or objective.
   
   
