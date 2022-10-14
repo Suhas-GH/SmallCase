@@ -1,7 +1,9 @@
 package com.example.smallcase.controller;
 
+import com.example.smallcase.dto.BasketsDTO;
 import com.example.smallcase.model.Baskets;
 import com.example.smallcase.service.BasketService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +18,16 @@ public class BasketController {
     private BasketService basketService;
 
     @PostMapping("/baskets/add")
-    public void addBasket(@RequestBody Baskets baskets){
+    public void addBasket(@RequestBody BasketsDTO basketsDTO){
+        ModelMapper modelMapper = new ModelMapper();
+        Baskets baskets = modelMapper.map(basketsDTO,Baskets.class);
         basketService.addBaskets(baskets);
     }
 
     @PutMapping("/baskets/modify/{basketId}")
-    public void modifyBaskets(@PathVariable Long basketId, @RequestBody Baskets baskets){
+    public void modifyBaskets(@PathVariable Long basketId, @RequestBody BasketsDTO basketsDTO){
+        ModelMapper modelMapper = new ModelMapper();
+        Baskets baskets = modelMapper.map(basketsDTO,Baskets.class);
         basketService.modifyBasket(basketId,baskets);
     }
 

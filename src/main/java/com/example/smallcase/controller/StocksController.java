@@ -1,8 +1,10 @@
 package com.example.smallcase.controller;
 
 
+import com.example.smallcase.dto.StocksDTO;
 import com.example.smallcase.model.Stocks;
 import com.example.smallcase.service.StocksService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +16,16 @@ public class StocksController {
     private StocksService stocksService;
 
     @PostMapping("/stocks/add")
-    public void addStocks(@RequestBody Stocks stocks){
-         stocksService.addStocks(stocks);
+    public void addStocks(@RequestBody StocksDTO stocksDTO){
+        ModelMapper modelMapper = new ModelMapper();
+        Stocks stocks = modelMapper.map(stocksDTO,Stocks.class);
+        stocksService.addStocks(stocks);
     }
 
     @PutMapping("/stocks/modify/{stockId}")
-    public void modifyStocks(@PathVariable Long stockId, @RequestBody Stocks stocks){
+    public void modifyStocks(@PathVariable Long stockId, @RequestBody StocksDTO stocksDTO){
+        ModelMapper modelMapper = new ModelMapper();
+        Stocks stocks = modelMapper.map(stocksDTO,Stocks.class);
         stocksService.modifyStocks(stockId,stocks);
     }
 
