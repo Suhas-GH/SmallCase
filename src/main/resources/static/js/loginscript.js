@@ -7,8 +7,8 @@ pInput = pField.querySelector("input");
 form.onsubmit = (e) => {
     e.preventDefault(); //preventing from form submitting
     //if username and password is blank then add shake class in it else call specified function
-    (uInput.value == "") ? uField.classList.add("shake", "error") : checkUName();
-    (pInput.value == "") ? pField.classList.add("shake", "error") : checkPass();
+    (uInput.value === "") ? uField.classList.add("shake", "error") : checkUName();
+    (pInput.value === "") ? pField.classList.add("shake", "error") : checkPass();
 
     setTimeout(()=>{ //remove shake class after 500ms
         uField.classList.remove("shake");
@@ -38,8 +38,7 @@ form.onsubmit = (e) => {
         }
     }
 
-    //if uField and pField doesn't contain error class that mean user filled details properly
-    if(!uField.classList.contains("error") && !pField.classList.contains("error")){
+    if(uInput.value !== "" && pInput.value !== ""){
         form.submit();
     }
 }

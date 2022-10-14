@@ -71,9 +71,7 @@ form.onsubmit = (e) => {
         }
     }
 
-    //if uField and pField doesn't contain error class that mean user filled details properly
-    if (!uField.classList.contains("error") && !pField.classList.contains("error")
-            && !fField.classList.contains("error") && !lField.classList.contains("error")) {
+    if(uInput.value !== "" && pInput.value !== "" && fInput.value !== "" && lInput.value !== ""){
         form.submit();
     }
 }
