@@ -49,14 +49,14 @@ public class SecurityConfiguration {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/Register","/users/add","/h2-console/**","/resources/**","/stocks/add","/baskets/add").permitAll()
+                .antMatchers("/","/register","/users/add","/h2-console/**","/resources/**","/stocks/add","/baskets/add").permitAll()
                 .antMatchers(staticResources).permitAll()
                 //.antMatchers("/login","/register","/v2/api-docs","/swagger-ui/index.html").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/").usernameParameter("UserName").passwordParameter("Password")
-                .defaultSuccessUrl("/Home", false)
+                .defaultSuccessUrl("/home", false)
                 .and()
                 .logout().permitAll();
         http.headers().frameOptions().sameOrigin();

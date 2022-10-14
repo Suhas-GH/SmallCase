@@ -11,10 +11,10 @@
 <body>
     <nav class="navbar sticky">
         <div class="content">
-            <div class="logo"><a th:href="@{/Home}">Small Case</a></div>
+            <div class="logo"><a th:href="@{/home}">Small Case</a></div>
             <ul class="menu-list">
-                <li><a th:href="@{/Home}">Home</a></li>
-                <li><a th:href="@{/Cart}"><i class="fas fa-shopping-cart" aria-hidden="true"></i></a></li>
+                <li><a th:href="@{/home}">Home</a></li>
+                <li><a th:href="@{/cart}"><i class="fas fa-shopping-cart" aria-hidden="true"></i></a></li>
                 <li><button th:onclick="@{window.location.href='/logout'}" class="logout-btn">Logout</button></li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
                                 <p th:text="${basket.Description}"></p>
                             </div>
                         </div>
-                        <button type="button" th:onclick="@{window.location.href='/BasketDetails/}+${basket.BasketId}+@{'}" class="btn">View Basket</button>
+                        <button type="button" th:onclick="@{window.location.href='/basketdetails/}+${basket.BasketId}+@{'}" class="btn">View Basket</button>
                     </div>
                 </div>
             </div>

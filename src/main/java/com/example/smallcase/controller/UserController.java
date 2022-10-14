@@ -23,7 +23,7 @@ public class UserController {
             return "redirect:/";
         }
         else {
-            return "redirect:/Register";
+            return "redirect:/register";
         }
     }
 

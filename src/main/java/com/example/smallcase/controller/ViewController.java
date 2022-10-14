@@ -43,7 +43,7 @@ public class ViewController {
     @Autowired
     private CartRepository cartRepository;
 
-    @RequestMapping("/Register")
+    @RequestMapping("/register")
     public String registration(Model model){
         ApplicationUser applicationUser = new ApplicationUser();
         model.addAttribute(applicationUser);
@@ -55,13 +55,13 @@ public class ViewController {
         return "index";
     }
 
-    @RequestMapping("/Home")
+    @RequestMapping("/home")
     public String home(Model model){
         model.addAttribute("basketList",basketController.getBaskets());
         return "home";
     }
 
-    @GetMapping("/BasketDetails/{basketId}")
+    @GetMapping("/basketdetails/{basketId}")
     public String basketDetails(Model model, @PathVariable Long basketId){
         Baskets baskets = basketController.getBasketDetails(basketId).orElseThrow(() -> new IllegalArgumentException("Invalid Basket Id:" + basketId));
         model.addAttribute("basketDetails",baskets);
@@ -76,7 +76,7 @@ public class ViewController {
         return "basketdetails";
     }
 
-    @GetMapping("/Cart")
+    @GetMapping("/cart")
     public String cart(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
@@ -91,13 +91,13 @@ public class ViewController {
     @GetMapping("/addtocart/{basketId}")
     public String addtocart(@PathVariable Long basketId){
         cartService.addToCart(basketId);
-        return "redirect:../Cart";
+        return "redirect:../cart";
     }
 
     @GetMapping("/removefromcart/{basketId}")
     public String removefromcart(@PathVariable Long basketId){
         cartService.deleteFromCart(basketId);
-        return "redirect:../Cart";
+        return "redirect:../cart";
     }
 
     @GetMapping("/logout")
