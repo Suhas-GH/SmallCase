@@ -1,7 +1,6 @@
 package com.example.smallcase.util;
 
 import com.example.smallcase.model.Baskets;
-import com.example.smallcase.model.CartMapping;
 import com.example.smallcase.model.Stocks;
 import com.example.smallcase.model.StocksMapping;
 import com.example.smallcase.repository.BasketsRepository;
@@ -11,9 +10,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Component
