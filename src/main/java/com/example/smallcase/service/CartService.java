@@ -57,7 +57,7 @@ public class CartService {
         if(userId!=null && basketId!=null && cartMappingRepository.existsByBasketId(basketId)!=0){
             Cart cart = cartRepository.findByUserId(userId);
             Long count = cartMappingRepository.cartCount(cart.getCartId());
-            if (count.equals(Long.valueOf(1))){
+            if (count.equals(1L)){
                 cartRepository.deleteById(cart.getCartId());
             }else {
                 cartMappingRepository.deleteBasketFromCart(basketId,cart.getCartId());
