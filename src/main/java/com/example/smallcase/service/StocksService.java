@@ -34,7 +34,7 @@ public class StocksService {
     public void deleteStocks(Long stockId){
         if(stocksRepository.existsById(stockId)){
             Long count = stocksMappingRepository.stocksExisting(stockId);
-            if(count.equals(Long.valueOf(0))){
+            if(count.equals(0L)){
                 stocksRepository.deleteById(stockId);
             }
         }
@@ -50,7 +50,7 @@ public class StocksService {
     }
 
     public Float getInvestmentAmount(List<Stocks> stocks, Long basketId){
-        Float investmentAmount = 0F;
+        float investmentAmount = 0F;
         for (Stocks stock : stocks){
             Set<StocksMapping> mappings = stock.getStocksMapping();
             for (StocksMapping stocksMapping : mappings){
