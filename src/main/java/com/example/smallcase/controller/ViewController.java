@@ -4,6 +4,7 @@ import com.example.smallcase.model.ApplicationUser;
 import com.example.smallcase.model.Baskets;
 import com.example.smallcase.model.Stocks;
 import com.example.smallcase.repository.ApplicationUserRepository;
+import com.example.smallcase.repository.CartMappingRepository;
 import com.example.smallcase.repository.CartRepository;
 import com.example.smallcase.service.BasketService;
 import com.example.smallcase.service.CartService;
@@ -25,6 +26,7 @@ import java.util.List;
 
 @Controller
 public class ViewController {
+
     @Autowired
     private BasketController basketController;
 
@@ -43,6 +45,9 @@ public class ViewController {
     @Autowired
     private CartRepository cartRepository;
 
+    @Autowired
+    private CartMappingRepository cartMappingRepository;
+
     @RequestMapping("/register")
     public String registration(Model model){
         ApplicationUser applicationUser = new ApplicationUser();
@@ -58,6 +63,7 @@ public class ViewController {
     @RequestMapping("/home")
     public String home(Model model){
         model.addAttribute("basketList",basketController.getBaskets());
+        getCartCount(model);
         return "home";
     }
 
@@ -73,6 +79,7 @@ public class ViewController {
         model.addAttribute("stockDetails",stocks);
         Float investmentAmount = stocksService.getInvestmentAmount(stocks, basketId);
         model.addAttribute("investmentAmount",investmentAmount);
+        getCartCount(model);
         return "basketdetails";
     }
 
@@ -85,6 +92,7 @@ public class ViewController {
         if (cartRepository.existsByUserId(userId)){
             model.addAttribute("cartBaskets", cartService.getUsersCart(userId));
         }
+        getCartCount(model);
         return "cart";
     }
 
@@ -107,5 +115,19 @@ public class ViewController {
             new SecurityContextLogoutHandler().logout(request,response,authentication);
         }
         return "redirect:/";
+    }
+
+    public void getCartCount(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        ApplicationUser user = userRepository.findByUserName(userName);
+        Long userId = user.getUserId();
+        if(cartRepository.existsByUserId(userId)){
+            Long cartId = cartRepository.findByUserId(userId).getCartId();
+            model.addAttribute("cartCount",cartMappingRepository.cartCount(cartId));
+        }
+        else {
+            model.addAttribute("cartCount", 0L);
+        }
     }
 }
