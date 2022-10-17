@@ -9,6 +9,10 @@ uInput = uField.querySelector("input"),
 pField = form.querySelector(".password"),
 pInput = pField.querySelector("input");
 
+const lowerCaseLetters = /[a-z]/g;
+const upperCaseLetters = /[A-Z]/g;
+const numbers = /[0-9]/g;
+
 form.onsubmit = (e) => {
     e.preventDefault(); //preventing from form submitting
     //if username and password is blank then add shake class in it else call specified function
@@ -35,14 +39,16 @@ form.onsubmit = (e) => {
         if (uInput.value === "") { //if uname is empty then add error and remove valid class
             uField.classList.add("error");
             uField.classList.remove("valid");
-        } else { //if uname is empty then remove error and add valid class
+        }
+        else { //if uname is empty then remove error and add valid class
             uField.classList.remove("error");
             uField.classList.add("valid");
         }
     }
 
     function checkPass(){ //checkPass function
-        if(pInput.value === ""){ //if pass is empty then add error and remove valid class
+        if(pInput.value === "" || !pInput.value.match(lowerCaseLetters) || !pInput.value.match(upperCaseLetters)
+            || !pInput.value.match(numbers) || pInput.value.length < 8){ //if pass is empty then add error and remove valid class
             pField.classList.add("error");
             pField.classList.remove("valid");
         }else{ //if pass is empty then remove error and add valid class
@@ -71,7 +77,9 @@ form.onsubmit = (e) => {
         }
     }
 
-    if(uInput.value !== "" && pInput.value !== "" && fInput.value !== "" && lInput.value !== ""){
+    if(uInput.value !== "" && pInput.value !== "" && fInput.value !== "" && lInput.value !== ""
+        && pInput.value.match(lowerCaseLetters) && pInput.value.match(upperCaseLetters)
+        && pInput.value.match(numbers) && pInput.value.length >= 8){
         form.submit();
     }
 }
