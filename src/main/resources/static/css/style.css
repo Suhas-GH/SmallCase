@@ -82,7 +82,7 @@
     color: #ff9300;
 }
 .about{
-    padding: 80px 0;
+    padding: 100px 0;
     background: #f7f7f7;
     height: 100vh;
 }
@@ -295,4 +295,7 @@
     padding: 0 5px;
     vertical-align: top;
     margin-left: -10px;
+}
+.font-small{
+    font-size: small;
 }

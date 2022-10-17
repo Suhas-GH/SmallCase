@@ -11,7 +11,9 @@
 <body>
     <nav class="navbar sticky">
         <div class="content">
-            <div class="logo"><a th:href="@{/home}">Small Case</a></div>
+            <div class="logo">
+                <a th:href="@{/home}">Small Case<br><div class="font-small">Theme Based Investment</div></a>
+            </div>
             <ul class="menu-list">
                 <li><a th:href="@{/home}">Home</a></li>
                 <li>
@@ -88,7 +90,7 @@
         stocksData.push(['Stocks', 'Weightage']);
         /*<![CDATA[*/
         /*[# th:each="stock:${stockDetails}"]*/
-        stocksData.push([ /*[[${stock.stockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[# th:if="${mapping.baskets.basketId==basketId}"]*//*[[${mapping.qty}]]*//*[/]*//*[/]*/]);
+        stocksData.push([ /*[[${stock.stockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[# th:if="${mapping.baskets.basketId==basketId}"]*//*[[${mapping.qty*stock.stockPrice}]]*//*[/]*//*[/]*/]);
         /*[/]*/
         /*]]>*/
 
