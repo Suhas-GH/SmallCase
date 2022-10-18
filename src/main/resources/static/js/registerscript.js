@@ -12,6 +12,7 @@ pInput = pField.querySelector("input");
 const lowerCaseLetters = /[a-z]/g;
 const upperCaseLetters = /[A-Z]/g;
 const numbers = /[0-9]/g;
+const specialCharacters = /[!@#$%^&*]/g;
 
 form.onsubmit = (e) => {
     e.preventDefault(); //preventing from form submitting
@@ -48,7 +49,7 @@ form.onsubmit = (e) => {
 
     function checkPass(){ //checkPass function
         if(pInput.value === "" || !pInput.value.match(lowerCaseLetters) || !pInput.value.match(upperCaseLetters)
-            || !pInput.value.match(numbers) || pInput.value.length < 8){ //if pass is empty then add error and remove valid class
+            || !pInput.value.match(numbers) || !pInput.value.match(specialCharacters) || pInput.value.length < 8){ //if pass is empty then add error and remove valid class
             pField.classList.add("error");
             pField.classList.remove("valid");
         }else{ //if pass is empty then remove error and add valid class
@@ -79,7 +80,7 @@ form.onsubmit = (e) => {
 
     if(uInput.value !== "" && pInput.value !== "" && fInput.value !== "" && lInput.value !== ""
         && pInput.value.match(lowerCaseLetters) && pInput.value.match(upperCaseLetters)
-        && pInput.value.match(numbers) && pInput.value.length >= 8){
+        && pInput.value.match(numbers) && pInput.value.match(specialCharacters) && pInput.value.length >= 8){
         form.submit();
     }
 }

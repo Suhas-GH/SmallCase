@@ -1,10 +1,12 @@
 package com.example.smallcase.util;
 
+import com.example.smallcase.model.ApplicationUser;
 import com.example.smallcase.model.Baskets;
 import com.example.smallcase.model.Stocks;
 import com.example.smallcase.model.StocksMapping;
 import com.example.smallcase.repository.BasketsRepository;
 import com.example.smallcase.repository.StocksRepository;
+import com.example.smallcase.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,10 +21,20 @@ public class DataLoader implements ApplicationRunner {
     private StocksRepository stocksRepository;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private BasketsRepository basketsRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        ApplicationUser user = new ApplicationUser();
+        user.setFirstName("Rohit");
+        user.setLastName("Sharma");
+        user.setUserName("RS");
+        user.setPassword("Abc@12345");
+        userService.registerUser(user);
+
         saveStocks("Tata Consultancy Services", (float) 34.39);//1
         saveStocks("Infosys", (float) 42.72);//2
         saveStocks("Wipro", (float) 31.65);//3
