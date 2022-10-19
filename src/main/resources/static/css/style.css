@@ -299,3 +299,21 @@
 .font-small{
     font-size: small;
 }
+.buy-btn {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    background: #007d78;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+.buy-btn[disabled]{
+    opacity: 0.6;
+    cursor: none;
+    pointer-events: none;
+}
+

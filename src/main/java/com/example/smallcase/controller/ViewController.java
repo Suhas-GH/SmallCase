@@ -89,6 +89,7 @@ public class ViewController {
         String userName = authentication.getName();
         ApplicationUser user = userRepository.findByUserName(userName);
         Long userId = user.getUserId();
+        model.addAttribute("cartExists", cartRepository.existsByUserId(userId));
         if (cartRepository.existsByUserId(userId)){
             model.addAttribute("cartBaskets", cartService.getUsersCart(userId));
         }
