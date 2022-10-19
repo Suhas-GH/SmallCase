@@ -31,7 +31,7 @@ public class DataLoader implements ApplicationRunner {
         ApplicationUser user = new ApplicationUser();
         user.setFirstName("Rohit");
         user.setLastName("Sharma");
-        user.setUserName("RS");
+        user.setUserName("RSharma001");
         user.setPassword("Abc@12345");
         userService.registerUser(user);
 
