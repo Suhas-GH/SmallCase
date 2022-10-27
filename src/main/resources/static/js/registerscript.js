@@ -1,12 +1,12 @@
 const form = document.querySelector("form");
-fField = form.querySelector(".firstName"),
-fInput = fField.querySelector("input"),
-lField = form.querySelector(".lastName"),
-lInput = lField.querySelector("input"),
+fField = form.querySelector(".firstName");
+fInput = fField.querySelector("input");
+lField = form.querySelector(".lastName");
+lInput = lField.querySelector("input");
 
-uField = form.querySelector(".userName"),
-uInput = uField.querySelector("input"),
-pField = form.querySelector(".password"),
+uField = form.querySelector(".userName");
+uInput = uField.querySelector("input");
+pField = form.querySelector(".password");
 pInput = pField.querySelector("input");
 
 const lowerCaseLetters = /[a-z]/g;

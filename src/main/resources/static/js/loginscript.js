@@ -1,7 +1,7 @@
 const form = document.querySelector("form");
-uField = form.querySelector(".userName"),
-uInput = uField.querySelector("input"),
-pField = form.querySelector(".password"),
+uField = form.querySelector(".userName");
+uInput = uField.querySelector("input");
+pField = form.querySelector(".password");
 pInput = pField.querySelector("input");
 
 form.onsubmit = (e) => {
