@@ -15,8 +15,7 @@ public class UserService {
 
     public boolean registerUser(ApplicationUser user){
         if(user.getUserName()!=null && user.getPassword()!=null && (!applicationUserRepository.existsByUserName(user.getUserName()))){
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             applicationUserRepository.save(user);
             return true;
         } else {
