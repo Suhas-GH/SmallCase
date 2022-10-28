@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmallCase | Basket Details</title>
+    <link rel="icon" type="image" href="../images/basket.jpg">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+    <nav class="navbar sticky">
+        <div class="content">
+            <div class="logo">
+                <a th:href="@{/home}">Small Case<br><div class="font-small">Theme Based Investment</div></a>
+            </div>
+            <ul class="menu-list">
+                <li><a th:href="@{/home}">Home</a></li>
+                <li>
+                    <a th:href="@{/cart}">
+                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                        <span class='badge' id='lblCartCount' th:text="${cartCount}"> 0 </span>
+                    </a>
+                </li>
+                <li><button th:onclick="@{window.location.href='/logout'}" class="logout-btn">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="about">
+        <div class="content">
+            <div class="wrapper basket-wrap">
+                <div class="outer">
+                    <div class="card" th:each="detail:${basketDetails}">
+                        <div class="content">
+                            <div class="img"><img src="../images/basket.jpg" alt="Basket"></div>
+                            <div class="details">
+                                <span class="name" th:text="${detail.basketName}"></span>
+                                <p th:text="${detail.description}"></p>
+                            </div>
+                        </div>
+                        <div class="basket-details">
+                            <div class="details">
+                                <p>Investment Amount</p>
+                                <span class="name"><i class="fas fa-euro-sign" aria-hidden="true"></i></span>
+                                <span class="name" th:text="${investmentAmount}"></span>
+                            </div>
+                            <button class="btn details-btn" th:onclick="@{window.location.href='../addtocart/}+${detail.basketId}+@{'}">Add To Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="card details">
+                        <div class="details-content">
+                            <div class="basket-info">
+                                <div class="weightage-table">
+                                    <div class="title header">
+                                        <ul>
+                                            <li>Stocks/Instruments</li>
+                                            <li>Quantity</li>
+                                        </ul>
+                                    </div>
+                                    <div class="data" th:each="stock:${stockDetails}">
+                                        <ul>
+                                            <li th:text="${stock.stockName}"></li>
+                                            <li th:each="mapping:${stock.stocksMapping}" th:if="${mapping.baskets.basketId==basketId}" th:text="${mapping.qty}"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="basket-info">
+                                <div id="piechart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script th:inline="javascript" type="text/javascript">
+        // Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        //Dynamic Data
+        var stocksData = [];
+        stocksData.push(['Stocks', 'Weightage']);
+        /*<![CDATA[*/
+        /*[# th:each="stock:${stockDetails}"]*/
+        stocksData.push([ /*[[${stock.stockName}]]*/, /*[# th:each="mapping:${stock.stocksMapping}"]*//*[# th:if="${mapping.baskets.basketId==basketId}"]*//*[[${mapping.qty*stock.stockPrice}]]*//*[/]*//*[/]*/]);
+        /*[/]*/
+        /*]]>*/
+
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(stocksData);
+
+            // Optional; add a title and set the width and height of the chart
+            var options = { 'title': 'Stocks Weightage', 'width': 550, 'height': 400 };
+
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+</html>

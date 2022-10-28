@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmallCase | Home</title>
+    <link rel="icon" type="image" href="../images/basket.jpg">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+    <nav class="navbar sticky">
+        <div class="content">
+            <div class="logo">
+                <a th:href="@{/home}">Small Case<br><div class="font-small">Theme Based Investment</div></a>
+            </div>
+            <ul class="menu-list">
+                <li><a th:href="@{/home}">Home</a></li>
+                <li>
+                    <a th:href="@{/cart}">
+                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                        <span class='badge' id='lblCartCount' th:text="${cartCount}"> 0 </span>
+                    </a>
+                </li>
+                <li><button th:onclick="@{window.location.href='/logout'}" class="logout-btn">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="about">
+        <div class="content">
+            <div class="wrapper">
+                <div class="outer">
+                    <div class="card" th:each="basket:${basketList}">
+                        <div class="content">
+                            <div class="img"><img src="images/basket.jpg" alt="Basket"></div>
+                            <div class="details">
+                                <span class="name" th:text="${basket.basketName}"></span>
+                                <p th:text="${basket.description}"></p>
+                            </div>
+                        </div>
+                        <button type="button" th:onclick="@{window.location.href='/basketdetails/}+${basket.basketId}+@{'}" class="btn">View Basket</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

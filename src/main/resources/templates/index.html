@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmallCase | Login</title>
+    <link rel="icon" type="image" href="../images/basket.jpg">
+    <link rel="stylesheet" th:href="@{/css/userAuth.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="brand">Small Case</header>
+        <h4 class="brand">Theme Based Investment</h4>
+        <h3 class="padTop brand">Login to your account</h3>
+        <form method="post" th:action="@{/}">
+            <div class="field userName">
+                <div class="input-area">
+                    <input type="text" name="userName" placeholder="User Name">
+                    <i class="icon fas fa-user" aria-hidden="true"></i>
+                    <i class="error error-icon fas fa-exclamation-circle" aria-hidden="true"></i>
+                </div>
+                <div class="error error-txt">Please Fill Valid User Name</div>
+            </div>
+            <div class="field password">
+                <div class="input-area">
+                    <input type="password" name="password" placeholder="Password">
+                    <i class="icon fas fa-lock" aria-hidden="true"></i>
+                    <i class="error error-icon fas fa-exclamation-circle" aria-hidden="true"></i>
+                </div>
+                <div class="error error-txt">Please Fill Valid Password</div>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+        <div class="sign-txt">Dont have an account? <a href="/register">Signup now</a></div>
+    </div>
+    <script th:src="@{/js/loginscript.js}"></script>
+</body>
+</html>
