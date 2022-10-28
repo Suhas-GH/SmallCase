@@ -5,6 +5,8 @@ import com.abnamro.smallcase.model.StocksMapping;
 import com.abnamro.smallcase.repository.StocksMappingRepository;
 import com.abnamro.smallcase.repository.StocksRepository;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +22,36 @@ public class StocksService {
     @Autowired
     private StocksMappingRepository stocksMappingRepository;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(StocksService.class);
+
     public void addStocks(@NotNull Stocks stocks){
-        if(stocks.getStockName()!=null && stocks.getStockPrice()!=null){
+        if(stocks.getStockName()==null){
+            LOGGER.error("Stock Name is Null");
+        }
+        else if (stocks.getStockPrice()==null){
+            LOGGER.error("Stock Price is Null");
+        }
+        else {
+            LOGGER.info("Stock Added Successfully");
             stocksRepository.save(stocks);
         }
     }
 
     public void modifyStocks(Long stockId, @NotNull Stocks stocks){
-        if(stockId!=null && stocks.getStockName()!=null && stocks.getStockPrice()!=null &&
-                stocksRepository.existsById(stockId)){
+        if(stockId==null){
+            LOGGER.error("Stock Id is Null");
+        }
+        else if(stocks.getStockName()==null){
+            LOGGER.error("Stock Name is Null");
+        }
+        else if(stocks.getStockPrice()==null){
+            LOGGER.error("Stock Price is Null");
+        }
+        else if(!stocksRepository.existsById(stockId)){
+            LOGGER.error("Stock Already Exists");
+        }
+        else {
+            LOGGER.info("Stock Details Modified Successfully");
             stocksRepository.modifyStocks(stocks.getStockName(),stocks.getStockPrice(),stockId);
         }
     }
@@ -38,7 +61,11 @@ public class StocksService {
             Long count = stocksMappingRepository.stocksExisting(stockId);
             if(count.equals(0L)){
                 stocksRepository.deleteById(stockId);
+                LOGGER.info("Stock Deleted Successfully");
             }
+        }
+        else {
+            LOGGER.error("Stock do not exist");
         }
     }
 

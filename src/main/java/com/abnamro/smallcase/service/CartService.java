@@ -8,6 +8,8 @@ import com.abnamro.smallcase.repository.ApplicationUserRepository;
 import com.abnamro.smallcase.repository.BasketsRepository;
 import com.abnamro.smallcase.repository.CartMappingRepository;
 import com.abnamro.smallcase.repository.CartRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,27 +32,38 @@ public class CartService {
     @Autowired
     private ApplicationUserRepository userRepository;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartService.class);
+
 
     public void addToCart(Long basketId){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         ApplicationUser user = userRepository.findByUserName(userName);
-        Long userId = user.getUserId();
-        if(userId!=null && basketId!=null && basketsRepository.existsById(basketId)){
-            Baskets baskets = new Baskets(basketId);
-            if(cartRepository.existsByUserId(userId)){
-                Cart cart = cartRepository.findByUserId(userId);
-                Long count = cartMappingRepository.existsByCartIdAndBasketId(cart.getCartId(), basketId);
-                if(count==0){
-                    CartMapping cartMapping = new CartMapping(baskets,cart);
-                    cartMappingRepository.save(cartMapping);
+        if(user == null){
+            LOGGER.error("User Not Found");
+        }
+        else {
+            Long userId = user.getUserId();
+            if(userId!=null && basketId!=null && basketsRepository.existsById(basketId)){
+                Baskets baskets = new Baskets(basketId);
+                if(cartRepository.existsByUserId(userId)){
+                    Cart cart = cartRepository.findByUserId(userId);
+                    Long count = cartMappingRepository.existsByCartIdAndBasketId(cart.getCartId(), basketId);
+                    if(count==0){
+                        CartMapping cartMapping = new CartMapping(baskets,cart);
+                        cartMappingRepository.save(cartMapping);
+                    }
+                }else {
+                    CartMapping cartMapping = new CartMapping(baskets);
+                    List<CartMapping> cartMappingList = new ArrayList<>();
+                    cartMappingList.add(cartMapping);
+                    Cart cart = new Cart(userId,cartMappingList);
+                    cartRepository.save(cart);
                 }
-            }else {
-                CartMapping cartMapping = new CartMapping(baskets);
-                List<CartMapping> cartMappingList = new ArrayList<>();
-                cartMappingList.add(cartMapping);
-                Cart cart = new Cart(userId,cartMappingList);
-                cartRepository.save(cart);
+                LOGGER.info("Basket Added To Cart");
+            }
+            else {
+                LOGGER.error("Basket Not Found");
             }
         }
     }
@@ -59,14 +72,23 @@ public class CartService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         ApplicationUser user = userRepository.findByUserName(userName);
-        Long userId = user.getUserId();
-        if(userId!=null && basketId!=null && cartMappingRepository.existsByBasketId(basketId)!=0){
-            Cart cart = cartRepository.findByUserId(userId);
-            Long count = cartMappingRepository.cartCount(cart.getCartId());
-            if (count.equals(1L)){
-                cartRepository.deleteById(cart.getCartId());
-            }else {
-                cartMappingRepository.deleteBasketFromCart(basketId,cart.getCartId());
+        if(user == null){
+            LOGGER.error("User Not Found");
+        }
+        else {
+            Long userId = user.getUserId();
+            if(userId!=null && basketId!=null && cartMappingRepository.existsByBasketId(basketId)!=0){
+                Cart cart = cartRepository.findByUserId(userId);
+                Long count = cartMappingRepository.cartCount(cart.getCartId());
+                if (count.equals(1L)){
+                    cartRepository.deleteById(cart.getCartId());
+                }else {
+                    cartMappingRepository.deleteBasketFromCart(basketId,cart.getCartId());
+                }
+                LOGGER.info("Basket Removed From Cart");
+            }
+            else {
+                LOGGER.error("Basket Not Available In Cart");
             }
         }
     }
