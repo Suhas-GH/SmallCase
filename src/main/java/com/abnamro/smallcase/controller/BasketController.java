@@ -5,8 +5,12 @@ import com.abnamro.smallcase.model.Baskets;
 import com.abnamro.smallcase.service.BasketService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,32 +22,35 @@ public class BasketController {
     private BasketService basketService;
 
     @PostMapping("/baskets/add")
-    public void addBasket(@RequestBody BasketsDTO basketsDTO){
+    public ResponseEntity<Object> addBasket(@Valid @RequestBody BasketsDTO basketsDTO){
         ModelMapper modelMapper = new ModelMapper();
         Baskets baskets = modelMapper.map(basketsDTO,Baskets.class);
         basketService.addBaskets(baskets);
+        return new ResponseEntity<>("Basket Created Successfully",HttpStatus.CREATED);
     }
 
     @PutMapping("/baskets/modify/{basketId}")
-    public void modifyBaskets(@PathVariable Long basketId, @RequestBody BasketsDTO basketsDTO){
+    public ResponseEntity<Object> modifyBaskets(@NotNull @PathVariable Long basketId, @Valid @RequestBody BasketsDTO basketsDTO){
         ModelMapper modelMapper = new ModelMapper();
         Baskets baskets = modelMapper.map(basketsDTO,Baskets.class);
         basketService.modifyBasket(basketId,baskets);
+        return new ResponseEntity<>("Basket Modified Successfully",HttpStatus.OK);
     }
 
     @DeleteMapping("/baskets/delete/{basketId}")
-    public void deleteBasket(@PathVariable Long basketId){
+    public ResponseEntity<Object> deleteBasket(@Valid @PathVariable Long basketId){
          basketService.deleteBasket(basketId);
+         return new ResponseEntity<>("Basket Deleted Successfully", HttpStatus.OK);
     }
 
     @GetMapping("/getBaskets")
-    public List<Baskets> getBaskets(){
-        return basketService.getBaskets();
+    public ResponseEntity<List<Baskets>> getBaskets(){
+        return new ResponseEntity<>(basketService.getBaskets(),HttpStatus.OK);
     }
 
     @GetMapping("/{basketId}")
-    public Optional<Baskets> getBasketDetails(@PathVariable Long basketId){
-        return basketService.getBasketDetails(basketId);
+    public ResponseEntity<Optional<Baskets>> getBasketDetails(@NotNull @PathVariable Long basketId){
+        return new ResponseEntity<>(basketService.getBasketDetails(basketId),HttpStatus.OK);
     }
 
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,16 +61,21 @@ public class ViewController {
         return "index";
     }
 
+    @RequestMapping("/errorPage")
+    public String error(){
+        return "errorPage";
+    }
+
     @RequestMapping("/home")
     public String home(Model model){
-        model.addAttribute("basketList",basketController.getBaskets());
+        model.addAttribute("basketList",basketController.getBaskets().getBody());
         getCartCount(model);
         return "home";
     }
 
     @GetMapping("/basketdetails/{basketId}")
-    public String basketDetails(Model model, @PathVariable Long basketId){
-        Baskets baskets = basketController.getBasketDetails(basketId).orElseThrow(() -> new IllegalArgumentException("Invalid Basket Id:" + basketId));
+    public String basketDetails(Model model, @NotNull @PathVariable Long basketId){
+        Baskets baskets = basketController.getBasketDetails(basketId).getBody().orElseThrow(() -> new IllegalArgumentException("Invalid Basket Id:" + basketId));
         model.addAttribute("basketDetails",baskets);
         model.addAttribute("basketId", basketId);
         List<Long> mappingIds = basketService.getMappingIds(baskets);
@@ -98,13 +104,13 @@ public class ViewController {
     }
 
     @GetMapping("/addtocart/{basketId}")
-    public String addtocart(@PathVariable Long basketId){
+    public String addtocart(@NotNull @PathVariable Long basketId){
         cartService.addToCart(basketId);
         return "redirect:../cart";
     }
 
     @GetMapping("/removefromcart/{basketId}")
-    public String removefromcart(@PathVariable Long basketId){
+    public String removefromcart(@NotNull @PathVariable Long basketId){
         cartService.deleteFromCart(basketId);
         return "redirect:../cart";
     }

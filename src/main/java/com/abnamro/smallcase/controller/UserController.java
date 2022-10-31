@@ -7,9 +7,13 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -20,10 +24,10 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping(value = "/users/add",consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public String createUser(ApplicationUserDTO userDTO){
+    public String createUser(@Valid ApplicationUserDTO userDTO){
         ModelMapper modelMapper = new ModelMapper();
         ApplicationUser user = modelMapper.map(userDTO,ApplicationUser.class);
-        if(userService.registerUser(user)){
+        if(userService.registerUser(user).getStatusCodeValue()==201){
             LOGGER.info("User Registered Successfully");
             return "redirect:/";
         }
@@ -34,8 +38,8 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public Long getUser(){
-        return userService.getUser();
+    public ResponseEntity<Object> getUser(){
+        return new ResponseEntity<>(userService.getUser(), HttpStatus.OK);
     }
 
 }

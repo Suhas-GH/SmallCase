@@ -3,6 +3,7 @@ package com.abnamro.smallcase.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Cart {
     private Long cartId;
 
     @Column(name = "userId")
+    @NotBlank(message = "User Id cannot be Null")
     private Long userId;
 
     @JsonManagedReference(value = "cart-mapping")

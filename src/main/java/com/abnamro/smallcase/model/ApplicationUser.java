@@ -1,6 +1,10 @@
 package com.abnamro.smallcase.model;
 
+
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class ApplicationUser {
@@ -10,15 +14,20 @@ public class ApplicationUser {
     Long userId;
 
     @Column(name = "FirstName")
+    @NotBlank(message = "First Name cannot be Null")
     private String firstName;
 
     @Column(name = "LastName")
+    @NotBlank(message = "Last Name cannot be Null")
     private String lastName;
 
     @Column(name = "UserName")
+    @NotBlank(message = "Username cannot be Null")
     private String userName;
 
     @Column(name = "Password")
+    @NotBlank(message = "Password cannot be Null")
+    @Pattern(regexp = "/[a-zA-Z0-9!@#$%^&*]/g", message = "Password does not match the required format")
     private String password;
 
     public ApplicationUser() {
