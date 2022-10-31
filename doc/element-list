@@ -1,0 +1,8 @@
+com.abnamro.smallcase
+com.abnamro.smallcase.controller
+com.abnamro.smallcase.dto
+com.abnamro.smallcase.model
+com.abnamro.smallcase.repository
+com.abnamro.smallcase.security
+com.abnamro.smallcase.service
+com.abnamro.smallcase.util
