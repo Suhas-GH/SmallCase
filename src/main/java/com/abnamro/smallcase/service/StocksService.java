@@ -25,47 +25,20 @@ public class StocksService {
     private static final Logger LOGGER = LoggerFactory.getLogger(StocksService.class);
 
     public void addStocks(@NotNull Stocks stocks){
-        if(stocks.getStockName()==null){
-            LOGGER.error("Stock Name is Null");
-        }
-        else if (stocks.getStockPrice()==null){
-            LOGGER.error("Stock Price is Null");
-        }
-        else {
-            LOGGER.info("Stock Added Successfully");
-            stocksRepository.save(stocks);
-        }
+        stocksRepository.save(stocks);
+        LOGGER.info("Stock Added Successfully");
     }
 
     public void modifyStocks(Long stockId, @NotNull Stocks stocks){
-        if(stockId==null){
-            LOGGER.error("Stock Id is Null");
-        }
-        else if(stocks.getStockName()==null){
-            LOGGER.error("Stock Name is Null");
-        }
-        else if(stocks.getStockPrice()==null){
-            LOGGER.error("Stock Price is Null");
-        }
-        else if(!stocksRepository.existsById(stockId)){
-            LOGGER.error("Stock Already Exists");
-        }
-        else {
-            LOGGER.info("Stock Details Modified Successfully");
-            stocksRepository.modifyStocks(stocks.getStockName(),stocks.getStockPrice(),stockId);
-        }
+        stocksRepository.modifyStocks(stocks.getStockName(),stocks.getStockPrice(),stockId);
+        LOGGER.info("Stock Details Modified Successfully");
     }
 
     public void deleteStocks(Long stockId){
-        if(stocksRepository.existsById(stockId)){
-            Long count = stocksMappingRepository.stocksExisting(stockId);
-            if(count.equals(0L)){
-                stocksRepository.deleteById(stockId);
-                LOGGER.info("Stock Deleted Successfully");
-            }
-        }
-        else {
-            LOGGER.error("Stock do not exist");
+        Long count = stocksMappingRepository.stocksExisting(stockId);
+        if(count.equals(0L)){
+            stocksRepository.deleteById(stockId);
+            LOGGER.info("Stock Deleted Successfully");
         }
     }
 

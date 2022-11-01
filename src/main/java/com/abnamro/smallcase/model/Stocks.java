@@ -1,10 +1,9 @@
 package com.abnamro.smallcase.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.jetbrains.annotations.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,11 +15,11 @@ public class Stocks implements Comparable<Stocks>{
     private Long stockId;
 
     @Column(name = "StockName")
-    @NotBlank(message = "Stock Name cannot be Null")
+    @NotNull(message = "Stock Name cannot be Null")
     private String stockName;
 
     @Column(name = "StockPrice")
-    @NotBlank(message = "Stock Price cannot be Null")
+    @NotNull(message = "Stock Price cannot be Null")
     private Float stockPrice;
 
     @JsonManagedReference(value = "stocks-mapping")

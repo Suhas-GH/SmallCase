@@ -1,3 +1,4 @@
+
 package com.abnamro.smallcase;
 
 import com.abnamro.smallcase.model.*;
@@ -78,7 +79,7 @@ class SmallCaseApplicationTests {
         List<ApplicationUser> list = new ArrayList<>();
         list.add(user);
         when(applicationUserRepository.findAll()).thenReturn(list);
-        assertEquals(user.getUserId(),userService.getUser());
+        assertEquals(user.getUserId(),userService.getUser(user));
     }
 
     @Test

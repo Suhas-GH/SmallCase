@@ -10,6 +10,7 @@ import com.abnamro.smallcase.service.CartService;
 import com.abnamro.smallcase.service.StocksService;
 import com.abnamro.smallcase.model.ApplicationUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 public class ViewController {
@@ -105,13 +108,21 @@ public class ViewController {
 
     @GetMapping("/addtocart/{basketId}")
     public String addtocart(@NotNull @PathVariable Long basketId){
-        cartService.addToCart(basketId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        ApplicationUser user = userRepository.findByUserName(userName);
+        Long userId = user.getUserId();
+        cartService.addToCart(basketId,userId);
         return "redirect:../cart";
     }
 
     @GetMapping("/removefromcart/{basketId}")
     public String removefromcart(@NotNull @PathVariable Long basketId){
-        cartService.deleteFromCart(basketId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        ApplicationUser user = userRepository.findByUserName(userName);
+        Long userId = user.getUserId();
+        cartService.deleteFromCart(basketId,userId);
         return "redirect:../cart";
     }
 

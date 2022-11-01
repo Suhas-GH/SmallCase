@@ -4,6 +4,7 @@ package com.abnamro.smallcase.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -27,7 +28,7 @@ public class ApplicationUser {
 
     @Column(name = "Password")
     @NotBlank(message = "Password cannot be Null")
-    @Pattern(regexp = "/[a-zA-Z0-9!@#$%^&*]/g", message = "Password does not match the required format")
+    //@Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{8,}", message = "Password does not match the required format")
     private String password;
 
     public ApplicationUser() {

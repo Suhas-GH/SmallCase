@@ -31,61 +31,37 @@ public class BasketService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BasketService.class);
 
     public void addBaskets(@NotNull Baskets baskets){
-        if(baskets.getBasketName()==null){
-            LOGGER.error("Basket Name is Null");
-        }
-        else if(baskets.getDescription()==null){
-            LOGGER.error("Basket Description is Null");
-        }
-        else if(baskets.getStocksMappings()==null){
-            LOGGER.error("Basket Stocks Mapping is Null");
+        List<Long> ids = baskets.getStocksMappings().stream().map(x -> x.getStocks().getStockId())
+                .toList();
+        int stocksCount = stocksRepository.checkStocks(ids);
+        if(stocksCount == ids.stream().count() && ids.stream().count()!=0){
+            LOGGER.info("Basket is created");
+            basketsRepository.save(baskets);
         }
         else {
-            List<Long> ids = baskets.getStocksMappings().stream().map(x -> x.getStocks().getStockId())
-                    .toList();
-            int stocksCount = stocksRepository.checkStocks(ids);
-            if(stocksCount == ids.stream().count() && ids.stream().count()!=0){
-                LOGGER.info("Basket is created");
-                basketsRepository.save(baskets);
-            }
-            else {
-                LOGGER.error("Basket Already Exists");
-            }
+            LOGGER.error("Basket Already Exists");
         }
     }
 
     public void modifyBasket(Long basketId, @NotNull Baskets baskets){
-        if(baskets.getBasketName()==null){
-            LOGGER.error("Basket Name is Null");
+        List<Long> ids = baskets.getStocksMappings().stream().map(x -> x.getStocks().getStockId())
+                .toList();
+        int stocksCount = stocksRepository.checkStocks(ids);
+        stocksMappingRepository.deleteMappingByBasketId(basketId);
+        if(stocksCount == ids.stream().count() && ids.stream().count()!=0){
+            basketsRepository.updateDetails(baskets.getBasketName(),baskets.getDescription(),basketId);
+            Set<StocksMapping> stocksMappingSet = baskets.getStocksMappings();
+            stocksMappingSet.forEach(x ->
+                    stocksMappingRepository.saveMappings(x.getQty(),x.getStocks().getStockId(),basketId));
+        }else {
+            basketsRepository.deleteById(basketId);
         }
-        else if(baskets.getDescription()==null){
-            LOGGER.error("Basket Description is Null");
-        }
-        else if(!basketsRepository.existsById(basketId)){
-            LOGGER.error("Basket Do Not Exist");
-        }
-        else {
-            List<Long> ids = baskets.getStocksMappings().stream().map(x -> x.getStocks().getStockId())
-                    .toList();
-            int stocksCount = stocksRepository.checkStocks(ids);
-            stocksMappingRepository.deleteMappingByBasketId(basketId);
-            if(stocksCount == ids.stream().count() && ids.stream().count()!=0){
-                basketsRepository.updateDetails(baskets.getBasketName(),baskets.getDescription(),basketId);
-                Set<StocksMapping> stocksMappingSet = baskets.getStocksMappings();
-                stocksMappingSet.forEach(x ->
-                        stocksMappingRepository.saveMappings(x.getQty(),x.getStocks().getStockId(),basketId));
-            }else {
-                basketsRepository.deleteById(basketId);
-            }
-            LOGGER.info("Basket Updated");
-        }
+        LOGGER.info("Basket Updated");
     }
 
     public void deleteBasket(Long basketId) {
-        if(basketsRepository.existsById(basketId)){
-            LOGGER.info("Basket Deleted");
-            basketsRepository.deleteById(basketId);
-        }
+        LOGGER.info("Basket Deleted");
+        basketsRepository.deleteById(basketId);
     }
 
     public List<Baskets> getBaskets(){

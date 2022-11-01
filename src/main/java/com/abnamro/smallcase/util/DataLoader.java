@@ -28,12 +28,14 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
         ApplicationUser user = new ApplicationUser();
         user.setFirstName("Rohit");
         user.setLastName("Sharma");
         user.setUserName("RSharma001");
         user.setPassword("Abc@12345");
         userService.registerUser(user);
+
 
         saveStocks("Tata Consultancy Services", (float) 34.39);//1
         saveStocks("Infosys", (float) 42.72);//2
@@ -119,4 +121,5 @@ public class DataLoader implements ApplicationRunner {
         stocks.setStockPrice(stockPrice);
         stocksRepository.save(stocks);
     }
+
 }

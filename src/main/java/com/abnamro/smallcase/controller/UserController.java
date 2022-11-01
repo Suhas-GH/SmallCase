@@ -1,6 +1,7 @@
 package com.abnamro.smallcase.controller;
 
 import com.abnamro.smallcase.dto.ApplicationUserDTO;
+import com.abnamro.smallcase.repository.ApplicationUserRepository;
 import com.abnamro.smallcase.service.UserService;
 import com.abnamro.smallcase.model.ApplicationUser;
 import org.modelmapper.ModelMapper;
@@ -10,16 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.NoSuchElementException;
 
 
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ApplicationUserRepository applicationUserRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
@@ -39,7 +47,15 @@ public class UserController {
 
     @GetMapping("/user")
     public ResponseEntity<Object> getUser(){
-        return new ResponseEntity<>(userService.getUser(), HttpStatus.OK);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        ApplicationUser user = applicationUserRepository.findByUserName(userName);
+        if(user == null){
+            throw new NoSuchElementException("User Not Found");
+        }
+        else {
+            return new ResponseEntity<>(userService.getUser(user), HttpStatus.OK);
+        }
     }
 
 }

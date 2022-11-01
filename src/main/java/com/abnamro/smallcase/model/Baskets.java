@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +18,7 @@ public class Baskets {
     private Long basketId;
 
     @Column(name = "BasketName")
-    @NotBlank(message = "Basket Name cannot be Null")
+    @NotNull(message = "Basket Name cannot be Null")
     private String basketName;
 
     @Column(name = "Description")

@@ -3,6 +3,7 @@ package com.abnamro.smallcase.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class StocksMapping {
@@ -22,6 +23,7 @@ public class StocksMapping {
     private Baskets baskets;
 
     @Column(name = "QTY")
+    @NotNull(message = "QTY cannot be Null")
     private int qty;
 
     public StocksMapping() {
