@@ -166,6 +166,19 @@ class SmallCaseApplicationTests {
     }
 
     @Test
+    void modifyBasket1(){
+        stocksMappingSet.add(stocksMapping);
+        List<Long> Ids = basket.getStocksMappings().stream().map(x -> x.getStocks().getStockId())
+                .collect(Collectors.toList());
+        long count = Ids.stream().count();
+        when(stocksRepository.checkStocks(Ids)).thenReturn(0);
+        when(basketsRepository.existsById(basket.getBasketId())).thenReturn(true);
+        basketService.modifyBasket(basket.getBasketId(),basket);
+//        verify(basketsRepository,times(1)).updateDetails("basket1","basket1 desc",1L);
+//        verify(stocksMappingRepository,times(1)).saveMappings(4,1L,1L);
+        verify(basketsRepository,times(1)).deleteById(1L);
+    }
+    @Test
     void getBasketDetailsTest(){
         when(basketsRepository.findById(basket.getBasketId())).thenReturn(Optional.ofNullable(basket));
         assertEquals(basket,basketService.getBasketDetails(basket.getBasketId()).get());

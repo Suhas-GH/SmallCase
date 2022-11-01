@@ -3,6 +3,7 @@ package com.abnamro.smallcase.model;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,8 @@ public class Baskets {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BasketId")
     private Long basketId;
+
+
 
     @Column(name = "BasketName")
     private String basketName;

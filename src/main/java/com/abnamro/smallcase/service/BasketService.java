@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -27,6 +28,7 @@ public class BasketService {
     private StocksMappingRepository stocksMappingRepository;
 
     public void addBaskets(@NotNull Baskets baskets){
+        System.out.println("service start");
         if(baskets.getBasketName()!=null && baskets.getDescription()!=null && baskets.getStocksMappings()!=null){
             List<Long> ids = baskets.getStocksMappings().stream().map(x -> x.getStocks().getStockId())
                     .toList();
@@ -35,6 +37,7 @@ public class BasketService {
                 basketsRepository.save(baskets);
             }
         }
+        System.out.println("service end");
     }
 
     public void modifyBasket(Long basketId, @NotNull Baskets baskets){
@@ -42,6 +45,8 @@ public class BasketService {
             List<Long> ids = baskets.getStocksMappings().stream().map(x -> x.getStocks().getStockId())
                     .toList();
             int stocksCount = stocksRepository.checkStocks(ids);
+            System.out.println("stocksCount "+stocksCount);
+            System.out.println("count "+ids.stream().count());
             stocksMappingRepository.deleteMappingByBasketId(basketId);
             if(stocksCount == ids.stream().count() && ids.stream().count()!=0){
                 basketsRepository.updateDetails(baskets.getBasketName(),baskets.getDescription(),basketId);
@@ -65,6 +70,7 @@ public class BasketService {
     }
 
     public Optional<Baskets> getBasketDetails(Long basketId){
+        //System.out.println("start");
         return basketsRepository.findById(basketId);
     }
 

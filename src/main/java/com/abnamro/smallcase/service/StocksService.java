@@ -36,6 +36,7 @@ public class StocksService {
     public void deleteStocks(Long stockId){
         if(stocksRepository.existsById(stockId)){
             Long count = stocksMappingRepository.stocksExisting(stockId);
+            //System.out.println(count);
             if(count.equals(0L)){
                 stocksRepository.deleteById(stockId);
             }
@@ -63,4 +64,8 @@ public class StocksService {
         }
         return investmentAmount;
     }
+
+//    public List<Stocks> getStocks() {
+//        return stocksRepository.findAll();
+//    }
 }

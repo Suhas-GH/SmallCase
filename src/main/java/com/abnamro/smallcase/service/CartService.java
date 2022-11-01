@@ -78,6 +78,10 @@ public class CartService {
                 .toList();
         return basketIds.stream().map(x->basketsRepository.findById(x).orElseThrow(() -> new IllegalArgumentException("Invalid Basket Id:" + x))).toList();
     }
+
+//    public List<Cart> getCart11() {
+//        return cartRepository.findAll();
+//    }
 }
 
 

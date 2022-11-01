@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 public class StocksController {
@@ -33,5 +35,10 @@ public class StocksController {
     public void deleteStocks(@PathVariable Long stockId){
         stocksService.deleteStocks(stockId);
     }
+
+//    @GetMapping("/stocks")
+//    public List<Stocks> getStocks(){
+//        return stocksService.getStocks();
+//    }
 
 }

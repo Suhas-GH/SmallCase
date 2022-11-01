@@ -1,6 +1,8 @@
 package com.abnamro.smallcase.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ApplicationUser {
@@ -9,15 +11,23 @@ public class ApplicationUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long userId;
 
+
+    @NotBlank(message = "firstname should not be blank")
     @Column(name = "FirstName")
     private String firstName;
 
+
+    @NotBlank(message = "lastname should not be blank")
     @Column(name = "LastName")
     private String lastName;
 
+
+    @NotBlank(message = "username should not be blank")
     @Column(name = "UserName")
     private String userName;
 
+
+    @NotBlank(message = "password should not be blank")
     @Column(name = "Password")
     private String password;
 

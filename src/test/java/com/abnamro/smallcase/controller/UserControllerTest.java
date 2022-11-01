@@ -6,6 +6,7 @@ import com.abnamro.smallcase.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -30,8 +31,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
 class UserControllerTest {
@@ -40,20 +42,21 @@ class UserControllerTest {
     @MockBean
     UserService userService;
     @MockBean
-    Authentication authentication;
-    @Mock
     ApplicationUserRepository applicationUserRepository;
-
     ApplicationUser user = new ApplicationUser(1L,"Prakash","A","prakash01","Abc@12345");
     @Test
     void createUser() throws Exception{
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users/add")
-                        .content(new ObjectMapper().writeValueAsString(user))
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
-                .andReturn();
         when(userService.registerUser(user)).thenReturn(true);
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users/add")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                .param("firstName", "Suhas")
+                .param("lastName", "Hosalli")
+                .param("userName", "SuhasUser1")
+                .param("password", "Suhas@123"))
+                .andDo(print())
+                .andReturn();
         //userService.registerUser(user);
-        assertEquals("",result.getResponse().getRedirectedUrl());
+        assertEquals("/",result.getResponse().getRedirectedUrl());
     }
 
     @Test
@@ -70,10 +73,10 @@ class UserControllerTest {
     @Test
     void getUser() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders.get("/user")
-                        .with(SecurityMockMvcRequestPostProcessors.user("john"))
+                        .with(SecurityMockMvcRequestPostProcessors.user(user.toString()))
                         .with(csrf()));
 
-        when(userService.getUser()).thenReturn(anyLong());
+        //when(userService.getUser()).thenReturn(anyLong());
         verify(userService,times(1)).getUser();
     }
 

@@ -3,6 +3,7 @@ package com.abnamro.smallcase.controller;
 import com.abnamro.smallcase.dto.BasketsDTO;
 import com.abnamro.smallcase.model.Baskets;
 import com.abnamro.smallcase.service.BasketService;
+import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,12 @@ public class BasketController {
     private BasketService basketService;
 
     @PostMapping("/baskets/add")
-    public void addBasket(@RequestBody BasketsDTO basketsDTO){
+    public void addBasket( @RequestBody BasketsDTO basketsDTO){
+        System.out.println("cont start");
         ModelMapper modelMapper = new ModelMapper();
         Baskets baskets = modelMapper.map(basketsDTO,Baskets.class);
         basketService.addBaskets(baskets);
+        System.out.println("cont end");
     }
 
     @PutMapping("/baskets/modify/{basketId}")
@@ -43,6 +46,7 @@ public class BasketController {
 
     @GetMapping("/{basketId}")
     public Optional<Baskets> getBasketDetails(@PathVariable Long basketId){
+        //System.out.println("start");
         return basketService.getBasketDetails(basketId);
     }
 
